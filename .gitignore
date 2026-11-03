@@ -3,9 +3,13 @@ data/
 vsl_motion_work/motion/
 vsl_motion_work/splits.windows.bak.csv
 
-# Trọng số mô hình: chỉ giữ m0 (dùng cho demo)
+# Trọng số mô hình: chỉ giữ những file demo cần (Polish/best_polish.weights.h5 321 MB, vượt giới hạn GitHub)
 *.h5
 !vsl_motion_work/runs/m0_diff_avg/best.weights.h5
+!space/models/m0_diff_avg/best.weights.h5
+!space/models/polish_resnet18_lstm/model.weights.h5
+!space/models/fusion/weights/mobilenet_v2_imagenet.h5
+!Fusion/weights/mobilenet_v2_imagenet.h5
 
 __pycache__/
 .ipynb_checkpoints/

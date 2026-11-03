@@ -45,18 +45,11 @@ Chung cho cả nhóm:
 Dữ liệu (`data/`, ~2,7 GB) và file chuyển động tiền tính không có trong repo. Trọng số có trong repo:
 
 - `vsl_motion_work/runs/m0_diff_avg/best.weights.h5` – M0
-- `Fusion/fusion_best.keras`, `space/models/fusion/fusion_best.keras` – classifier của Fusion
-- `Siformer/run/`, `space/models/siformer/run/` – checkpoint Siformer (epoch 47)
+- `Fusion/` – classifier `fusion_best.keras` và MobileNetV2 `weights/mobilenet_v2_imagenet.h5`
+- `Siformer/run/` – checkpoint Siformer (epoch 47)
+- `space/models/` – bản sao đủ trọng số cho cả 4 mô hình của demo web; Polish dùng `model.weights.h5` đã bỏ trạng thái optimizer
 
-Các file `*.h5` khác bị `.gitignore` bỏ qua. Để chạy demo web cần đặt thêm:
-
-| File | Lấy từ đâu |
-|---|---|
-| `space/models/m0_diff_avg/best.weights.h5` | chép từ `vsl_motion_work/runs/m0_diff_avg/best.weights.h5` |
-| `space/models/fusion/weights/mobilenet_v2_imagenet.h5` | gói bàn giao Fusion (thư mục `weights/`) |
-| `space/models/polish_resnet18_lstm/model.weights.h5` | trọng số Polish đã bỏ trạng thái optimizer |
-
-`space/app.py` nạp sẵn M0 lúc khởi động nên ít nhất phải có file M0. Mô hình thiếu trọng số sẽ báo lỗi khi được chọn.
+`Polish/best_polish.weights.h5` (321 MB, vượt giới hạn 100 MB/file của GitHub) và các file `*.h5` khác không có trong repo.
 
 ## Chạy
 
@@ -72,7 +65,6 @@ python demo_webcam.py      # demo webcam: SPACE ghi một lần ký, A tự ghi 
 Demo web (cài thư viện theo [`space/README.md`](space/README.md); Fusion và Siformer cần thêm môi trường MediaPipe riêng):
 
 ```bash
-cp vsl_motion_work/runs/m0_diff_avg/best.weights.h5 space/models/m0_diff_avg/
 python space/app.py        # mở http://localhost:7860
 ```
 
