@@ -1,0 +1,8 @@
+tensorflow==2.21.0
+keras==3.12.4
+numpy==2.2.6
+opencv-python-headless==5.0.0.93
+# keras-hub cài riêng: pip install --no-deps keras-hub==0.25.1 (tránh kéo tensorflow-text); đây là phụ thuộc còn lại của nó
+regex==2026.7.19
+rich==15.0.0
+kagglehub==1.0.2

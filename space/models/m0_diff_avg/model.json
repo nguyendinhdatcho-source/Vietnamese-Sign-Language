@@ -1,0 +1,9 @@
+{
+  "type": "motion_diff",
+  "title": "M0 · Frame Difference + MobileNetV2",
+  "description": "Temporal Average Pooling · test macro-F1 86,2%",
+  "order": 0,
+  "capture": {"fps": 13, "frames": 30},
+  "weights": "best.weights.h5",
+  "config": {"backbone": "mobilenetv2", "temporal": "avg", "T": 16, "size": 224}
+}

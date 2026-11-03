@@ -1,0 +1,14 @@
+{
+  "format": "TensorFlow Checkpoint + optional Keras weights",
+  "best_epoch_zero_based": 47,
+  "best_validation_accuracy": 0.9194805194805195,
+  "training_completed": true,
+  "h5_verified": false,
+  "checkpoint_pointer": "run/best.json",
+  "checkpoint_metadata": "run/epoch_0047.json",
+  "checkpoint_files": [
+    "run/epoch_0047.ckpt-48.index",
+    "run/epoch_0047.ckpt-48.data-00000-of-00001"
+  ],
+  "notes": "TensorFlow checkpoint is the canonical best model. Kaggle paths in config.json must be adapted for local inference."
+}

@@ -1,0 +1,40 @@
+{
+    "module": "keras_hub.src.models.resnet.resnet_backbone",
+    "class_name": "ResNetBackbone",
+    "config": {
+        "name": "res_net_backbone",
+        "trainable": true,
+        "input_conv_filters": [
+            64
+        ],
+        "input_conv_kernel_sizes": [
+            7
+        ],
+        "stackwise_num_filters": [
+            64,
+            128,
+            256,
+            512
+        ],
+        "stackwise_num_blocks": [
+            2,
+            2,
+            2,
+            2
+        ],
+        "stackwise_num_strides": [
+            1,
+            2,
+            2,
+            2
+        ],
+        "block_type": "basic_block",
+        "use_pre_activation": false,
+        "image_shape": [
+            null,
+            null,
+            3
+        ]
+    },
+    "registered_name": "keras_hub>ResNetBackbone"
+}

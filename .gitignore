@@ -10,3 +10,11 @@ vsl_motion_work/splits.windows.bak.csv
 __pycache__/
 .ipynb_checkpoints/
 .venv/
+
+# Python riêng cho MediaPipe 0.10.14 (mô hình fusion)
+.venv-mp/
+
+# Gói model đã giải nén / checkpoint TensorFlow (giữ ngoài git như các trọng số khác)
+/Siformer/
+/siformer_best_model.zip
+*.ckpt-*.data-*

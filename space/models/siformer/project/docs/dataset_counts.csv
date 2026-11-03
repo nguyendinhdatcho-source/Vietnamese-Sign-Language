@@ -1,0 +1,101 @@
+﻿label_name,train,validation,test
+An ủi,26,3,3
+Ban ngày,19,2,2
+Ban đêm,5,1,1
+Biết,53,6,7
+Biếu tặng,41,5,5
+Bàn tay,6,1,1
+Băn khoăn,50,6,6
+Bạn thân,14,2,2
+Bế mạc,28,3,4
+Bệnh nhân,4,1,1
+Bệnh viện,38,5,5
+Bộ y tế,13,2,2
+Chiều,48,6,6
+Cho,39,5,5
+Chào,25,3,3
+Chân,50,6,6
+Chúng ta,11,1,2
+Chạy,53,7,7
+Chấp nhận,5,1,1
+Chậm lại,53,7,7
+Con gấu,45,6,6
+Cá,46,6,6
+Cách ly,4,1,1
+Cám dỗ,54,7,7
+Có thể,18,2,2
+Cơ thể,4,1,1
+Cảm ơn,50,6,6
+Cần,5,1,1
+Cứu,43,5,5
+Dạy dỗ,34,4,4
+Dễ,41,5,5
+Ghét,26,3,3
+Giúp,36,4,5
+Ho,4,1,1
+Hy sinh,37,5,5
+Hâm mộ,40,5,5
+Hôm nay,21,2,3
+Họ,38,5,5
+Học sinh,5,1,1
+Khai báo,43,5,5
+Khu cách ly,9,1,1
+Khóc,53,7,7
+Khẩu trang,9,1,1
+Kết hôn,25,3,3
+Lo lắng,5,1,1
+Lây bệnh,40,5,5
+Mua,28,3,4
+Mời vào,45,5,6
+Nghe,54,7,7
+Nghỉ ngơi,53,7,7
+Ngón tay,5,1,1
+Nhà,57,7,7
+Nhìn,48,6,6
+Nhầm,5,1,1
+Nhớ,45,6,6
+Nói,24,3,3
+Nói xấu,54,7,7
+Nôn ói,35,4,5
+Nặng,38,5,5
+Phía sau,53,7,7
+Phạt,29,4,4
+Phỏng vấn,36,4,5
+Phục hồi,4,1,1
+Rau,58,7,7
+Rẽ phải,12,1,2
+Rẽ trái,52,6,7
+San sẻ,37,4,5
+Sốt,4,1,1
+Sử dụng,47,6,6
+Thích,9,1,1
+Thăm,15,2,2
+Thương,6,1,1
+Thất lạc,19,2,3
+Thức dậy,53,7,7
+Thức ăn,45,5,6
+Trưa,45,6,6
+Trường học,59,7,8
+Tôi,42,5,5
+Tập luyện,9,1,1
+Tối,19,2,3
+Uống,20,2,3
+Virus,5,1,1
+Vâng lời,6,1,1
+Xa,50,6,6
+Xe máy,4,1,1
+Xe đạp,13,1,2
+Xin lỗi,15,2,2
+Xin phép,30,4,4
+Xuất viện,38,5,5
+Xúc động,47,6,6
+Áp dụng,57,7,7
+Ô tô,37,5,5
+Ăn,48,6,6
+Ăn mừng,50,6,6
+Đi,50,6,6
+Đâu,43,5,5
+Đầu,43,5,6
+Đẹp,14,2,2
+Đồng ý,43,5,5
+Ủng hộ,4,1,1

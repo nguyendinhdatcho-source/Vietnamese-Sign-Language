@@ -1,0 +1,44 @@
+{
+  "model": "fusion",
+  "architecture": "Fusion Attention",
+  "origin": "local_cpu_training",
+  "run_id": "20261022T180151Z_fusion_7841f1fe95",
+  "training_date_local": "2026-10-23",
+  "timezone": "Asia/Bangkok",
+  "class_weight_mode": "balanced",
+  "checkpoint": "fusion_best.keras",
+  "checkpoint_sha256": "b7d861931645c9f0a34a018146d20cc9691358d64e3d87dff3e016bf7956cb84",
+  "best_epoch": 14,
+  "checkpoint_selection": "min val_loss",
+  "completed_epochs": 22,
+  "class_count": 100,
+  "class_mapping_sha256_canonical": "5500b9b341038fe536902d4758d003ec21576b2bce996d112afc0ddb157b067d",
+  "input_shapes": {
+    "rgb_features": [
+      null,
+      16,
+      1280
+    ],
+    "landmark_features": [
+      null,
+      16,
+      300
+    ],
+    "valid_mask": [
+      null,
+      16
+    ]
+  },
+  "runtime_at_training": {
+    "python": "3.12.3",
+    "tensorflow": "2.20.0",
+    "keras": "3.11.3",
+    "numpy": "1.26.4",
+    "platform": "Windows-11-10.0.26200-SP0",
+    "devices": [
+      "/physical_device:CPU:0"
+    ]
+  },
+  "purpose": "inference",
+  "optimizer_restore": false
+}

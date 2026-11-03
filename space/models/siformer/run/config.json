@@ -1,0 +1,84 @@
+{
+  "data_root": "/kaggle/working/vsl100",
+  "manifest_dir": "/kaggle/working/vsl100/manifest",
+  "label_mapping": "/kaggle/working/vsl100/project/configs/labels.json",
+  "cache_dir": "/kaggle/working/vsl100/cache",
+  "run_dir": "/kaggle/working/vsl100/training_1793268447856569616",
+  "num_classes": 100,
+  "seed": 379,
+  "device": "cuda",
+  "frames": 16,
+  "sampling": "uniform_floor",
+  "offline_variants": 0,
+  "rgb_resize": null,
+  "extractor": {
+    "name": "imported_landmark",
+    "version": "m05_npz_float32_receipt_v1",
+    "model_complexity": 1,
+    "min_detection_confidence": 0.5,
+    "min_tracking_confidence": 0.5,
+    "pose_visibility": 0.5
+  },
+  "augmentation": {
+    "speed": [
+      0.9,
+      1.1
+    ],
+    "crop_area": [
+      0.85,
+      1.0
+    ],
+    "brightness": [
+      0.8,
+      1.2
+    ],
+    "contrast": [
+      0.8,
+      1.2
+    ],
+    "saturation": [
+      0.8,
+      1.2
+    ]
+  },
+  "rectification": {
+    "enabled": false,
+    "aa_table": null,
+    "fe_table": null,
+    "alpha": 0.5
+  },
+  "model": {
+    "encoder_layers": 3,
+    "decoder_layers": 2,
+    "inference": "static",
+    "patience": 0,
+    "pretrained": null
+  },
+  "train": {
+    "batch_size": 32,
+    "workers": 0,
+    "epochs": 100,
+    "weighted_sampler": true,
+    "optimizer": "AdamW",
+    "lr": 0.0001,
+    "weight_decay": 1e-08,
+    "scheduler": "MultiStepLR",
+    "milestones": [
+      60,
+      80
+    ],
+    "gamma": 0.1,
+    "gradient_clip": 1.0,
+    "amp": false,
+    "early_stopping_patience": 10
+  },
+  "evaluation": {
+    "warmup": 10,
+    "latency_repeats": 50,
+    "calibration_patiences": [
+      0,
+      1,
+      2
+    ]
+  }
+}

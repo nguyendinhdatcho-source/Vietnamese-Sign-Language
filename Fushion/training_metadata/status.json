@@ -1,0 +1,22 @@
+{
+  "status": "EARLY_STOPPED",
+  "updated_utc": "2026-10-22T18:11:14.051831+00:00",
+  "completed_epochs": 22,
+  "best_epoch": 14,
+  "best_val_loss": 1.2545047998428345,
+  "best_checkpoint": {
+    "path": "checkpoints/epoch_0014_f401a97817.keras",
+    "sha256": "b7d861931645c9f0a34a018146d20cc9691358d64e3d87dff3e016bf7956cb84",
+    "graph_sha256": "14c2db7c648ed726938b5db0839d7c693c727f3c7aa6c6344e186cf033120e96",
+    "optimizer_iterations": 2702,
+    "learning_rate": 0.0010000000474974513
+  },
+  "latest_checkpoint": {
+    "path": "checkpoints/epoch_0022_4971dbf3e9.keras",
+    "sha256": "174faebbb4e65d4a32c683b5e6e0617eaedb78b4886477f73435f55338830090",
+    "graph_sha256": "14c2db7c648ed726938b5db0839d7c693c727f3c7aa6c6344e186cf033120e96",
+    "optimizer_iterations": 4246,
+    "learning_rate": 0.0002500000118743628
+  },
+  "test_used": false
+}

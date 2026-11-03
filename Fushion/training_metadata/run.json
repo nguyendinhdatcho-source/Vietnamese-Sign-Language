@@ -1,0 +1,1695 @@
+{
+  "version": "m09_epoch_fit_v1",
+  "config": {
+    "model": "fusion",
+    "batch_size": 16,
+    "epochs": 50,
+    "learning_rate": 0.001,
+    "seed": 42,
+    "early_stopping_patience": 8,
+    "reduce_lr_patience": 4,
+    "reduce_lr_factor": 0.5,
+    "min_learning_rate": 1e-06,
+    "min_delta": 0.0,
+    "global_clipnorm": 1.0,
+    "class_weighting": true,
+    "class_weight_power": 1.0,
+    "class_weight_cap": 3077.0,
+    "prefetch": 1,
+    "device": "cpu",
+    "experiment_schema": "m09_class_weight_ablation_v2",
+    "class_weight_mode": "balanced",
+    "experiment_variant": "fusion_cw_balanced",
+    "class_weight_formula": "N_train / (K * train_count[class_id])",
+    "train_statistics": {
+      "classes": [
+        {
+          "class_name": "An ủi",
+          "count": 26,
+          "label_id": 0,
+          "weight": 1.1834615384615386
+        },
+        {
+          "class_name": "Áp dụng",
+          "count": 57,
+          "label_id": 1,
+          "weight": 0.5398245614035088
+        },
+        {
+          "class_name": "Ăn",
+          "count": 48,
+          "label_id": 2,
+          "weight": 0.6410416666666666
+        },
+        {
+          "class_name": "Ăn mừng",
+          "count": 50,
+          "label_id": 3,
+          "weight": 0.6154
+        },
+        {
+          "class_name": "Ban ngày",
+          "count": 19,
+          "label_id": 4,
+          "weight": 1.6194736842105264
+        },
+        {
+          "class_name": "Ban đêm",
+          "count": 5,
+          "label_id": 5,
+          "weight": 6.154
+        },
+        {
+          "class_name": "Bàn tay",
+          "count": 6,
+          "label_id": 6,
+          "weight": 5.128333333333333
+        },
+        {
+          "class_name": "Băn khoăn",
+          "count": 50,
+          "label_id": 7,
+          "weight": 0.6154
+        },
+        {
+          "class_name": "Bạn thân",
+          "count": 14,
+          "label_id": 8,
+          "weight": 2.197857142857143
+        },
+        {
+          "class_name": "Bế mạc",
+          "count": 28,
+          "label_id": 9,
+          "weight": 1.0989285714285715
+        },
+        {
+          "class_name": "Bệnh nhân",
+          "count": 4,
+          "label_id": 10,
+          "weight": 7.6925
+        },
+        {
+          "class_name": "Bệnh viện",
+          "count": 38,
+          "label_id": 11,
+          "weight": 0.8097368421052632
+        },
+        {
+          "class_name": "Biết",
+          "count": 53,
+          "label_id": 12,
+          "weight": 0.580566037735849
+        },
+        {
+          "class_name": "Biếu tặng",
+          "count": 41,
+          "label_id": 13,
+          "weight": 0.7504878048780488
+        },
+        {
+          "class_name": "Bộ y tế",
+          "count": 13,
+          "label_id": 14,
+          "weight": 2.366923076923077
+        },
+        {
+          "class_name": "Cá",
+          "count": 46,
+          "label_id": 15,
+          "weight": 0.6689130434782609
+        },
+        {
+          "class_name": "Cách ly",
+          "count": 4,
+          "label_id": 16,
+          "weight": 7.6925
+        },
+        {
+          "class_name": "Cám dỗ",
+          "count": 54,
+          "label_id": 17,
+          "weight": 0.5698148148148148
+        },
+        {
+          "class_name": "Cần",
+          "count": 5,
+          "label_id": 18,
+          "weight": 6.154
+        },
+        {
+          "class_name": "Cảm ơn",
+          "count": 50,
+          "label_id": 19,
+          "weight": 0.6154
+        },
+        {
+          "class_name": "Chào",
+          "count": 25,
+          "label_id": 20,
+          "weight": 1.2308
+        },
+        {
+          "class_name": "Chân",
+          "count": 50,
+          "label_id": 21,
+          "weight": 0.6154
+        },
+        {
+          "class_name": "Chấp nhận",
+          "count": 5,
+          "label_id": 22,
+          "weight": 6.154
+        },
+        {
+          "class_name": "Chạy",
+          "count": 53,
+          "label_id": 23,
+          "weight": 0.580566037735849
+        },
+        {
+          "class_name": "Chậm lại",
+          "count": 53,
+          "label_id": 24,
+          "weight": 0.580566037735849
+        },
+        {
+          "class_name": "Chiều",
+          "count": 48,
+          "label_id": 25,
+          "weight": 0.6410416666666666
+        },
+        {
+          "class_name": "Cho",
+          "count": 39,
+          "label_id": 26,
+          "weight": 0.788974358974359
+        },
+        {
+          "class_name": "Chúng ta",
+          "count": 11,
+          "label_id": 27,
+          "weight": 2.7972727272727274
+        },
+        {
+          "class_name": "Con gấu",
+          "count": 45,
+          "label_id": 28,
+          "weight": 0.6837777777777778
+        },
+        {
+          "class_name": "Có thể",
+          "count": 18,
+          "label_id": 29,
+          "weight": 1.7094444444444445
+        },
+        {
+          "class_name": "Cơ thể",
+          "count": 4,
+          "label_id": 30,
+          "weight": 7.6925
+        },
+        {
+          "class_name": "Cứu",
+          "count": 43,
+          "label_id": 31,
+          "weight": 0.7155813953488372
+        },
+        {
+          "class_name": "Dạy dỗ",
+          "count": 34,
+          "label_id": 32,
+          "weight": 0.905
+        },
+        {
+          "class_name": "Dễ",
+          "count": 41,
+          "label_id": 33,
+          "weight": 0.7504878048780488
+        },
+        {
+          "class_name": "Ghét",
+          "count": 26,
+          "label_id": 34,
+          "weight": 1.1834615384615386
+        },
+        {
+          "class_name": "Giúp",
+          "count": 36,
+          "label_id": 35,
+          "weight": 0.8547222222222223
+        },
+        {
+          "class_name": "Hâm mộ",
+          "count": 40,
+          "label_id": 36,
+          "weight": 0.76925
+        },
+        {
+          "class_name": "Ho",
+          "count": 4,
+          "label_id": 37,
+          "weight": 7.6925
+        },
+        {
+          "class_name": "Hôm nay",
+          "count": 21,
+          "label_id": 38,
+          "weight": 1.4652380952380952
+        },
+        {
+          "class_name": "Họ",
+          "count": 38,
+          "label_id": 39,
+          "weight": 0.8097368421052632
+        },
+        {
+          "class_name": "Học sinh",
+          "count": 5,
+          "label_id": 40,
+          "weight": 6.154
+        },
+        {
+          "class_name": "Hy sinh",
+          "count": 37,
+          "label_id": 41,
+          "weight": 0.8316216216216217
+        },
+        {
+          "class_name": "Kết hôn",
+          "count": 25,
+          "label_id": 42,
+          "weight": 1.2308
+        },
+        {
+          "class_name": "Khai báo",
+          "count": 43,
+          "label_id": 43,
+          "weight": 0.7155813953488372
+        },
+        {
+          "class_name": "Khẩu trang",
+          "count": 9,
+          "label_id": 44,
+          "weight": 3.418888888888889
+        },
+        {
+          "class_name": "Khóc",
+          "count": 53,
+          "label_id": 45,
+          "weight": 0.580566037735849
+        },
+        {
+          "class_name": "Khu cách ly",
+          "count": 9,
+          "label_id": 46,
+          "weight": 3.418888888888889
+        },
+        {
+          "class_name": "Lây bệnh",
+          "count": 40,
+          "label_id": 47,
+          "weight": 0.76925
+        },
+        {
+          "class_name": "Lo lắng",
+          "count": 5,
+          "label_id": 48,
+          "weight": 6.154
+        },
+        {
+          "class_name": "Mời vào",
+          "count": 45,
+          "label_id": 49,
+          "weight": 0.6837777777777778
+        },
+        {
+          "class_name": "Mua",
+          "count": 28,
+          "label_id": 50,
+          "weight": 1.0989285714285715
+        },
+        {
+          "class_name": "Nặng",
+          "count": 38,
+          "label_id": 51,
+          "weight": 0.8097368421052632
+        },
+        {
+          "class_name": "Nghe",
+          "count": 54,
+          "label_id": 52,
+          "weight": 0.5698148148148148
+        },
+        {
+          "class_name": "Nghỉ ngơi",
+          "count": 53,
+          "label_id": 53,
+          "weight": 0.580566037735849
+        },
+        {
+          "class_name": "Ngón tay",
+          "count": 5,
+          "label_id": 54,
+          "weight": 6.154
+        },
+        {
+          "class_name": "Nhà",
+          "count": 57,
+          "label_id": 55,
+          "weight": 0.5398245614035088
+        },
+        {
+          "class_name": "Nhầm",
+          "count": 5,
+          "label_id": 56,
+          "weight": 6.154
+        },
+        {
+          "class_name": "Nhìn",
+          "count": 48,
+          "label_id": 57,
+          "weight": 0.6410416666666666
+        },
+        {
+          "class_name": "Nhớ",
+          "count": 45,
+          "label_id": 58,
+          "weight": 0.6837777777777778
+        },
+        {
+          "class_name": "Nói",
+          "count": 24,
+          "label_id": 59,
+          "weight": 1.2820833333333332
+        },
+        {
+          "class_name": "Nói xấu",
+          "count": 54,
+          "label_id": 60,
+          "weight": 0.5698148148148148
+        },
+        {
+          "class_name": "Nôn ói",
+          "count": 35,
+          "label_id": 61,
+          "weight": 0.8791428571428571
+        },
+        {
+          "class_name": "Ô tô",
+          "count": 37,
+          "label_id": 62,
+          "weight": 0.8316216216216217
+        },
+        {
+          "class_name": "Phạt",
+          "count": 29,
+          "label_id": 63,
+          "weight": 1.0610344827586207
+        },
+        {
+          "class_name": "Phía sau",
+          "count": 53,
+          "label_id": 64,
+          "weight": 0.580566037735849
+        },
+        {
+          "class_name": "Phỏng vấn",
+          "count": 36,
+          "label_id": 65,
+          "weight": 0.8547222222222223
+        },
+        {
+          "class_name": "Phục hồi",
+          "count": 4,
+          "label_id": 66,
+          "weight": 7.6925
+        },
+        {
+          "class_name": "Rau",
+          "count": 58,
+          "label_id": 67,
+          "weight": 0.5305172413793103
+        },
+        {
+          "class_name": "Rẽ phải",
+          "count": 12,
+          "label_id": 68,
+          "weight": 2.5641666666666665
+        },
+        {
+          "class_name": "Rẽ trái",
+          "count": 52,
+          "label_id": 69,
+          "weight": 0.5917307692307693
+        },
+        {
+          "class_name": "San sẻ",
+          "count": 37,
+          "label_id": 70,
+          "weight": 0.8316216216216217
+        },
+        {
+          "class_name": "Sốt",
+          "count": 4,
+          "label_id": 71,
+          "weight": 7.6925
+        },
+        {
+          "class_name": "Sử dụng",
+          "count": 47,
+          "label_id": 72,
+          "weight": 0.6546808510638298
+        },
+        {
+          "class_name": "Tập luyện",
+          "count": 9,
+          "label_id": 73,
+          "weight": 3.418888888888889
+        },
+        {
+          "class_name": "Thất lạc",
+          "count": 19,
+          "label_id": 74,
+          "weight": 1.6194736842105264
+        },
+        {
+          "class_name": "Thăm",
+          "count": 15,
+          "label_id": 75,
+          "weight": 2.0513333333333335
+        },
+        {
+          "class_name": "Thích",
+          "count": 9,
+          "label_id": 76,
+          "weight": 3.418888888888889
+        },
+        {
+          "class_name": "Thương",
+          "count": 6,
+          "label_id": 77,
+          "weight": 5.128333333333333
+        },
+        {
+          "class_name": "Thức ăn",
+          "count": 45,
+          "label_id": 78,
+          "weight": 0.6837777777777778
+        },
+        {
+          "class_name": "Thức dậy",
+          "count": 53,
+          "label_id": 79,
+          "weight": 0.580566037735849
+        },
+        {
+          "class_name": "Tôi",
+          "count": 42,
+          "label_id": 80,
+          "weight": 0.7326190476190476
+        },
+        {
+          "class_name": "Tối",
+          "count": 19,
+          "label_id": 81,
+          "weight": 1.6194736842105264
+        },
+        {
+          "class_name": "Trưa",
+          "count": 45,
+          "label_id": 82,
+          "weight": 0.6837777777777778
+        },
+        {
+          "class_name": "Trường học",
+          "count": 59,
+          "label_id": 83,
+          "weight": 0.5215254237288136
+        },
+        {
+          "class_name": "Uống",
+          "count": 20,
+          "label_id": 84,
+          "weight": 1.5385
+        },
+        {
+          "class_name": "Ủng hộ",
+          "count": 4,
+          "label_id": 85,
+          "weight": 7.6925
+        },
+        {
+          "class_name": "Vâng lời",
+          "count": 6,
+          "label_id": 86,
+          "weight": 5.128333333333333
+        },
+        {
+          "class_name": "Virus",
+          "count": 5,
+          "label_id": 87,
+          "weight": 6.154
+        },
+        {
+          "class_name": "Xa",
+          "count": 50,
+          "label_id": 88,
+          "weight": 0.6154
+        },
+        {
+          "class_name": "Xe máy",
+          "count": 4,
+          "label_id": 89,
+          "weight": 7.6925
+        },
+        {
+          "class_name": "Xe đạp",
+          "count": 13,
+          "label_id": 90,
+          "weight": 2.366923076923077
+        },
+        {
+          "class_name": "Xin lỗi",
+          "count": 15,
+          "label_id": 91,
+          "weight": 2.0513333333333335
+        },
+        {
+          "class_name": "Xin phép",
+          "count": 30,
+          "label_id": 92,
+          "weight": 1.0256666666666667
+        },
+        {
+          "class_name": "Xuất viện",
+          "count": 38,
+          "label_id": 93,
+          "weight": 0.8097368421052632
+        },
+        {
+          "class_name": "Xúc động",
+          "count": 47,
+          "label_id": 94,
+          "weight": 0.6546808510638298
+        },
+        {
+          "class_name": "Đâu",
+          "count": 43,
+          "label_id": 95,
+          "weight": 0.7155813953488372
+        },
+        {
+          "class_name": "Đầu",
+          "count": 43,
+          "label_id": 96,
+          "weight": 0.7155813953488372
+        },
+        {
+          "class_name": "Đẹp",
+          "count": 14,
+          "label_id": 97,
+          "weight": 2.197857142857143
+        },
+        {
+          "class_name": "Đi",
+          "count": 50,
+          "label_id": 98,
+          "weight": 0.6154
+        },
+        {
+          "class_name": "Đồng ý",
+          "count": 43,
+          "label_id": 99,
+          "weight": 0.7155813953488372
+        }
+      ],
+      "count_max": 59,
+      "count_min": 4,
+      "label_mapping_sha256": "5500b9b341038fe536902d4758d003ec21576b2bce996d112afc0ddb157b067d",
+      "num_classes": 100,
+      "sample_count": 3077,
+      "source_split": "train",
+      "train_csv_sha256": "cc74c5a7b689f81441b168291301e61cd6eff4d78079557c2684aab152102f1e",
+      "weight_max": 7.6925,
+      "weight_min": 0.5215254237288136
+    },
+    "applied_class_weights": {
+      "0": 1.1834615384615386,
+      "1": 0.5398245614035088,
+      "2": 0.6410416666666666,
+      "3": 0.6154,
+      "4": 1.6194736842105264,
+      "5": 6.154,
+      "6": 5.128333333333333,
+      "7": 0.6154,
+      "8": 2.197857142857143,
+      "9": 1.0989285714285715,
+      "10": 7.6925,
+      "11": 0.8097368421052632,
+      "12": 0.580566037735849,
+      "13": 0.7504878048780488,
+      "14": 2.366923076923077,
+      "15": 0.6689130434782609,
+      "16": 7.6925,
+      "17": 0.5698148148148148,
+      "18": 6.154,
+      "19": 0.6154,
+      "20": 1.2308,
+      "21": 0.6154,
+      "22": 6.154,
+      "23": 0.580566037735849,
+      "24": 0.580566037735849,
+      "25": 0.6410416666666666,
+      "26": 0.788974358974359,
+      "27": 2.7972727272727274,
+      "28": 0.6837777777777778,
+      "29": 1.7094444444444445,
+      "30": 7.6925,
+      "31": 0.7155813953488372,
+      "32": 0.905,
+      "33": 0.7504878048780488,
+      "34": 1.1834615384615386,
+      "35": 0.8547222222222223,
+      "36": 0.76925,
+      "37": 7.6925,
+      "38": 1.4652380952380952,
+      "39": 0.8097368421052632,
+      "40": 6.154,
+      "41": 0.8316216216216217,
+      "42": 1.2308,
+      "43": 0.7155813953488372,
+      "44": 3.418888888888889,
+      "45": 0.580566037735849,
+      "46": 3.418888888888889,
+      "47": 0.76925,
+      "48": 6.154,
+      "49": 0.6837777777777778,
+      "50": 1.0989285714285715,
+      "51": 0.8097368421052632,
+      "52": 0.5698148148148148,
+      "53": 0.580566037735849,
+      "54": 6.154,
+      "55": 0.5398245614035088,
+      "56": 6.154,
+      "57": 0.6410416666666666,
+      "58": 0.6837777777777778,
+      "59": 1.2820833333333332,
+      "60": 0.5698148148148148,
+      "61": 0.8791428571428571,
+      "62": 0.8316216216216217,
+      "63": 1.0610344827586207,
+      "64": 0.580566037735849,
+      "65": 0.8547222222222223,
+      "66": 7.6925,
+      "67": 0.5305172413793103,
+      "68": 2.5641666666666665,
+      "69": 0.5917307692307693,
+      "70": 0.8316216216216217,
+      "71": 7.6925,
+      "72": 0.6546808510638298,
+      "73": 3.418888888888889,
+      "74": 1.6194736842105264,
+      "75": 2.0513333333333335,
+      "76": 3.418888888888889,
+      "77": 5.128333333333333,
+      "78": 0.6837777777777778,
+      "79": 0.580566037735849,
+      "80": 0.7326190476190476,
+      "81": 1.6194736842105264,
+      "82": 0.6837777777777778,
+      "83": 0.5215254237288136,
+      "84": 1.5385,
+      "85": 7.6925,
+      "86": 5.128333333333333,
+      "87": 6.154,
+      "88": 0.6154,
+      "89": 7.6925,
+      "90": 2.366923076923077,
+      "91": 2.0513333333333335,
+      "92": 1.0256666666666667,
+      "93": 0.8097368421052632,
+      "94": 0.6546808510638298,
+      "95": 0.7155813953488372,
+      "96": 0.7155813953488372,
+      "97": 2.197857142857143,
+      "98": 0.6154,
+      "99": 0.7155813953488372
+    },
+    "weight_application": "TRAIN Dataset sample_weight once; VALID and metrics unweighted",
+    "cap_policy": "cap=N_train is inactive: N/(K*n_c) <= N for positive K,n_c",
+    "initialization_policy": "fresh M07/M08 initialization after original M09 set_seed; no old checkpoint",
+    "training_policy": {
+      "optimizer": "Adam",
+      "initial_learning_rate": 0.001,
+      "global_clipnorm": 1.0,
+      "callbacks": "ClassWeightTrainingControl inherits original val_loss counters",
+      "checkpoint_monitor": "val_loss",
+      "validation_weighted": false,
+      "oversampling": false,
+      "augmentation": "unchanged cached features"
+    },
+    "metric_policy": {
+      "average": "macro over all 100 mapping IDs",
+      "zero_division": 0,
+      "epoch_accumulation": "confusion counts, not batch means",
+      "precision": "TP/(TP+FP)",
+      "recall": "TP/(TP+FN)",
+      "weighted_metrics": false,
+      "history_columns": [
+        "macro_precision",
+        "macro_recall",
+        "val_macro_precision",
+        "val_macro_recall"
+      ]
+    },
+    "adapter_code_binding": {
+      "src/fusion_vsl/class_weight_experiment.py": "4b6276b159735ce74b620608514f69a8f1335e9873e66553397d52d7af50244d",
+      "scripts/10_train_cw.py": "3e8503e8646156a490e641832fbfcff133f55b3d8639e4a58124633e6d552ae1",
+      "src/fusion_vsl/class_weight_metrics.py": "e2811b2adbac0d69430ba1b0543bd813b302d9c728995ce9de2ac0c107b0f110",
+      "src/fusion_vsl/class_weight_training.py": "304f059f75bc8dc5f2f0cf5d43ebd641886382b567981d268436702200754469"
+    },
+    "configuration_sha256": "9ea8b46178cd19ccd2e6d31c9c398beda9b9d169a9d7efd217f5e165963c571e"
+  },
+  "compatibility_config": {
+    "model": "fusion",
+    "batch_size": 16,
+    "learning_rate": 0.001,
+    "seed": 42,
+    "early_stopping_patience": 8,
+    "reduce_lr_patience": 4,
+    "reduce_lr_factor": 0.5,
+    "min_learning_rate": 1e-06,
+    "min_delta": 0.0,
+    "global_clipnorm": 1.0,
+    "class_weighting": true,
+    "class_weight_power": 1.0,
+    "class_weight_cap": 3077.0,
+    "prefetch": 1,
+    "device": "cpu",
+    "experiment_schema": "m09_class_weight_ablation_v2",
+    "class_weight_mode": "balanced",
+    "experiment_variant": "fusion_cw_balanced",
+    "class_weight_formula": "N_train / (K * train_count[class_id])",
+    "train_statistics": {
+      "classes": [
+        {
+          "class_name": "An ủi",
+          "count": 26,
+          "label_id": 0,
+          "weight": 1.1834615384615386
+        },
+        {
+          "class_name": "Áp dụng",
+          "count": 57,
+          "label_id": 1,
+          "weight": 0.5398245614035088
+        },
+        {
+          "class_name": "Ăn",
+          "count": 48,
+          "label_id": 2,
+          "weight": 0.6410416666666666
+        },
+        {
+          "class_name": "Ăn mừng",
+          "count": 50,
+          "label_id": 3,
+          "weight": 0.6154
+        },
+        {
+          "class_name": "Ban ngày",
+          "count": 19,
+          "label_id": 4,
+          "weight": 1.6194736842105264
+        },
+        {
+          "class_name": "Ban đêm",
+          "count": 5,
+          "label_id": 5,
+          "weight": 6.154
+        },
+        {
+          "class_name": "Bàn tay",
+          "count": 6,
+          "label_id": 6,
+          "weight": 5.128333333333333
+        },
+        {
+          "class_name": "Băn khoăn",
+          "count": 50,
+          "label_id": 7,
+          "weight": 0.6154
+        },
+        {
+          "class_name": "Bạn thân",
+          "count": 14,
+          "label_id": 8,
+          "weight": 2.197857142857143
+        },
+        {
+          "class_name": "Bế mạc",
+          "count": 28,
+          "label_id": 9,
+          "weight": 1.0989285714285715
+        },
+        {
+          "class_name": "Bệnh nhân",
+          "count": 4,
+          "label_id": 10,
+          "weight": 7.6925
+        },
+        {
+          "class_name": "Bệnh viện",
+          "count": 38,
+          "label_id": 11,
+          "weight": 0.8097368421052632
+        },
+        {
+          "class_name": "Biết",
+          "count": 53,
+          "label_id": 12,
+          "weight": 0.580566037735849
+        },
+        {
+          "class_name": "Biếu tặng",
+          "count": 41,
+          "label_id": 13,
+          "weight": 0.7504878048780488
+        },
+        {
+          "class_name": "Bộ y tế",
+          "count": 13,
+          "label_id": 14,
+          "weight": 2.366923076923077
+        },
+        {
+          "class_name": "Cá",
+          "count": 46,
+          "label_id": 15,
+          "weight": 0.6689130434782609
+        },
+        {
+          "class_name": "Cách ly",
+          "count": 4,
+          "label_id": 16,
+          "weight": 7.6925
+        },
+        {
+          "class_name": "Cám dỗ",
+          "count": 54,
+          "label_id": 17,
+          "weight": 0.5698148148148148
+        },
+        {
+          "class_name": "Cần",
+          "count": 5,
+          "label_id": 18,
+          "weight": 6.154
+        },
+        {
+          "class_name": "Cảm ơn",
+          "count": 50,
+          "label_id": 19,
+          "weight": 0.6154
+        },
+        {
+          "class_name": "Chào",
+          "count": 25,
+          "label_id": 20,
+          "weight": 1.2308
+        },
+        {
+          "class_name": "Chân",
+          "count": 50,
+          "label_id": 21,
+          "weight": 0.6154
+        },
+        {
+          "class_name": "Chấp nhận",
+          "count": 5,
+          "label_id": 22,
+          "weight": 6.154
+        },
+        {
+          "class_name": "Chạy",
+          "count": 53,
+          "label_id": 23,
+          "weight": 0.580566037735849
+        },
+        {
+          "class_name": "Chậm lại",
+          "count": 53,
+          "label_id": 24,
+          "weight": 0.580566037735849
+        },
+        {
+          "class_name": "Chiều",
+          "count": 48,
+          "label_id": 25,
+          "weight": 0.6410416666666666
+        },
+        {
+          "class_name": "Cho",
+          "count": 39,
+          "label_id": 26,
+          "weight": 0.788974358974359
+        },
+        {
+          "class_name": "Chúng ta",
+          "count": 11,
+          "label_id": 27,
+          "weight": 2.7972727272727274
+        },
+        {
+          "class_name": "Con gấu",
+          "count": 45,
+          "label_id": 28,
+          "weight": 0.6837777777777778
+        },
+        {
+          "class_name": "Có thể",
+          "count": 18,
+          "label_id": 29,
+          "weight": 1.7094444444444445
+        },
+        {
+          "class_name": "Cơ thể",
+          "count": 4,
+          "label_id": 30,
+          "weight": 7.6925
+        },
+        {
+          "class_name": "Cứu",
+          "count": 43,
+          "label_id": 31,
+          "weight": 0.7155813953488372
+        },
+        {
+          "class_name": "Dạy dỗ",
+          "count": 34,
+          "label_id": 32,
+          "weight": 0.905
+        },
+        {
+          "class_name": "Dễ",
+          "count": 41,
+          "label_id": 33,
+          "weight": 0.7504878048780488
+        },
+        {
+          "class_name": "Ghét",
+          "count": 26,
+          "label_id": 34,
+          "weight": 1.1834615384615386
+        },
+        {
+          "class_name": "Giúp",
+          "count": 36,
+          "label_id": 35,
+          "weight": 0.8547222222222223
+        },
+        {
+          "class_name": "Hâm mộ",
+          "count": 40,
+          "label_id": 36,
+          "weight": 0.76925
+        },
+        {
+          "class_name": "Ho",
+          "count": 4,
+          "label_id": 37,
+          "weight": 7.6925
+        },
+        {
+          "class_name": "Hôm nay",
+          "count": 21,
+          "label_id": 38,
+          "weight": 1.4652380952380952
+        },
+        {
+          "class_name": "Họ",
+          "count": 38,
+          "label_id": 39,
+          "weight": 0.8097368421052632
+        },
+        {
+          "class_name": "Học sinh",
+          "count": 5,
+          "label_id": 40,
+          "weight": 6.154
+        },
+        {
+          "class_name": "Hy sinh",
+          "count": 37,
+          "label_id": 41,
+          "weight": 0.8316216216216217
+        },
+        {
+          "class_name": "Kết hôn",
+          "count": 25,
+          "label_id": 42,
+          "weight": 1.2308
+        },
+        {
+          "class_name": "Khai báo",
+          "count": 43,
+          "label_id": 43,
+          "weight": 0.7155813953488372
+        },
+        {
+          "class_name": "Khẩu trang",
+          "count": 9,
+          "label_id": 44,
+          "weight": 3.418888888888889
+        },
+        {
+          "class_name": "Khóc",
+          "count": 53,
+          "label_id": 45,
+          "weight": 0.580566037735849
+        },
+        {
+          "class_name": "Khu cách ly",
+          "count": 9,
+          "label_id": 46,
+          "weight": 3.418888888888889
+        },
+        {
+          "class_name": "Lây bệnh",
+          "count": 40,
+          "label_id": 47,
+          "weight": 0.76925
+        },
+        {
+          "class_name": "Lo lắng",
+          "count": 5,
+          "label_id": 48,
+          "weight": 6.154
+        },
+        {
+          "class_name": "Mời vào",
+          "count": 45,
+          "label_id": 49,
+          "weight": 0.6837777777777778
+        },
+        {
+          "class_name": "Mua",
+          "count": 28,
+          "label_id": 50,
+          "weight": 1.0989285714285715
+        },
+        {
+          "class_name": "Nặng",
+          "count": 38,
+          "label_id": 51,
+          "weight": 0.8097368421052632
+        },
+        {
+          "class_name": "Nghe",
+          "count": 54,
+          "label_id": 52,
+          "weight": 0.5698148148148148
+        },
+        {
+          "class_name": "Nghỉ ngơi",
+          "count": 53,
+          "label_id": 53,
+          "weight": 0.580566037735849
+        },
+        {
+          "class_name": "Ngón tay",
+          "count": 5,
+          "label_id": 54,
+          "weight": 6.154
+        },
+        {
+          "class_name": "Nhà",
+          "count": 57,
+          "label_id": 55,
+          "weight": 0.5398245614035088
+        },
+        {
+          "class_name": "Nhầm",
+          "count": 5,
+          "label_id": 56,
+          "weight": 6.154
+        },
+        {
+          "class_name": "Nhìn",
+          "count": 48,
+          "label_id": 57,
+          "weight": 0.6410416666666666
+        },
+        {
+          "class_name": "Nhớ",
+          "count": 45,
+          "label_id": 58,
+          "weight": 0.6837777777777778
+        },
+        {
+          "class_name": "Nói",
+          "count": 24,
+          "label_id": 59,
+          "weight": 1.2820833333333332
+        },
+        {
+          "class_name": "Nói xấu",
+          "count": 54,
+          "label_id": 60,
+          "weight": 0.5698148148148148
+        },
+        {
+          "class_name": "Nôn ói",
+          "count": 35,
+          "label_id": 61,
+          "weight": 0.8791428571428571
+        },
+        {
+          "class_name": "Ô tô",
+          "count": 37,
+          "label_id": 62,
+          "weight": 0.8316216216216217
+        },
+        {
+          "class_name": "Phạt",
+          "count": 29,
+          "label_id": 63,
+          "weight": 1.0610344827586207
+        },
+        {
+          "class_name": "Phía sau",
+          "count": 53,
+          "label_id": 64,
+          "weight": 0.580566037735849
+        },
+        {
+          "class_name": "Phỏng vấn",
+          "count": 36,
+          "label_id": 65,
+          "weight": 0.8547222222222223
+        },
+        {
+          "class_name": "Phục hồi",
+          "count": 4,
+          "label_id": 66,
+          "weight": 7.6925
+        },
+        {
+          "class_name": "Rau",
+          "count": 58,
+          "label_id": 67,
+          "weight": 0.5305172413793103
+        },
+        {
+          "class_name": "Rẽ phải",
+          "count": 12,
+          "label_id": 68,
+          "weight": 2.5641666666666665
+        },
+        {
+          "class_name": "Rẽ trái",
+          "count": 52,
+          "label_id": 69,
+          "weight": 0.5917307692307693
+        },
+        {
+          "class_name": "San sẻ",
+          "count": 37,
+          "label_id": 70,
+          "weight": 0.8316216216216217
+        },
+        {
+          "class_name": "Sốt",
+          "count": 4,
+          "label_id": 71,
+          "weight": 7.6925
+        },
+        {
+          "class_name": "Sử dụng",
+          "count": 47,
+          "label_id": 72,
+          "weight": 0.6546808510638298
+        },
+        {
+          "class_name": "Tập luyện",
+          "count": 9,
+          "label_id": 73,
+          "weight": 3.418888888888889
+        },
+        {
+          "class_name": "Thất lạc",
+          "count": 19,
+          "label_id": 74,
+          "weight": 1.6194736842105264
+        },
+        {
+          "class_name": "Thăm",
+          "count": 15,
+          "label_id": 75,
+          "weight": 2.0513333333333335
+        },
+        {
+          "class_name": "Thích",
+          "count": 9,
+          "label_id": 76,
+          "weight": 3.418888888888889
+        },
+        {
+          "class_name": "Thương",
+          "count": 6,
+          "label_id": 77,
+          "weight": 5.128333333333333
+        },
+        {
+          "class_name": "Thức ăn",
+          "count": 45,
+          "label_id": 78,
+          "weight": 0.6837777777777778
+        },
+        {
+          "class_name": "Thức dậy",
+          "count": 53,
+          "label_id": 79,
+          "weight": 0.580566037735849
+        },
+        {
+          "class_name": "Tôi",
+          "count": 42,
+          "label_id": 80,
+          "weight": 0.7326190476190476
+        },
+        {
+          "class_name": "Tối",
+          "count": 19,
+          "label_id": 81,
+          "weight": 1.6194736842105264
+        },
+        {
+          "class_name": "Trưa",
+          "count": 45,
+          "label_id": 82,
+          "weight": 0.6837777777777778
+        },
+        {
+          "class_name": "Trường học",
+          "count": 59,
+          "label_id": 83,
+          "weight": 0.5215254237288136
+        },
+        {
+          "class_name": "Uống",
+          "count": 20,
+          "label_id": 84,
+          "weight": 1.5385
+        },
+        {
+          "class_name": "Ủng hộ",
+          "count": 4,
+          "label_id": 85,
+          "weight": 7.6925
+        },
+        {
+          "class_name": "Vâng lời",
+          "count": 6,
+          "label_id": 86,
+          "weight": 5.128333333333333
+        },
+        {
+          "class_name": "Virus",
+          "count": 5,
+          "label_id": 87,
+          "weight": 6.154
+        },
+        {
+          "class_name": "Xa",
+          "count": 50,
+          "label_id": 88,
+          "weight": 0.6154
+        },
+        {
+          "class_name": "Xe máy",
+          "count": 4,
+          "label_id": 89,
+          "weight": 7.6925
+        },
+        {
+          "class_name": "Xe đạp",
+          "count": 13,
+          "label_id": 90,
+          "weight": 2.366923076923077
+        },
+        {
+          "class_name": "Xin lỗi",
+          "count": 15,
+          "label_id": 91,
+          "weight": 2.0513333333333335
+        },
+        {
+          "class_name": "Xin phép",
+          "count": 30,
+          "label_id": 92,
+          "weight": 1.0256666666666667
+        },
+        {
+          "class_name": "Xuất viện",
+          "count": 38,
+          "label_id": 93,
+          "weight": 0.8097368421052632
+        },
+        {
+          "class_name": "Xúc động",
+          "count": 47,
+          "label_id": 94,
+          "weight": 0.6546808510638298
+        },
+        {
+          "class_name": "Đâu",
+          "count": 43,
+          "label_id": 95,
+          "weight": 0.7155813953488372
+        },
+        {
+          "class_name": "Đầu",
+          "count": 43,
+          "label_id": 96,
+          "weight": 0.7155813953488372
+        },
+        {
+          "class_name": "Đẹp",
+          "count": 14,
+          "label_id": 97,
+          "weight": 2.197857142857143
+        },
+        {
+          "class_name": "Đi",
+          "count": 50,
+          "label_id": 98,
+          "weight": 0.6154
+        },
+        {
+          "class_name": "Đồng ý",
+          "count": 43,
+          "label_id": 99,
+          "weight": 0.7155813953488372
+        }
+      ],
+      "count_max": 59,
+      "count_min": 4,
+      "label_mapping_sha256": "5500b9b341038fe536902d4758d003ec21576b2bce996d112afc0ddb157b067d",
+      "num_classes": 100,
+      "sample_count": 3077,
+      "source_split": "train",
+      "train_csv_sha256": "cc74c5a7b689f81441b168291301e61cd6eff4d78079557c2684aab152102f1e",
+      "weight_max": 7.6925,
+      "weight_min": 0.5215254237288136
+    },
+    "applied_class_weights": {
+      "0": 1.1834615384615386,
+      "1": 0.5398245614035088,
+      "2": 0.6410416666666666,
+      "3": 0.6154,
+      "4": 1.6194736842105264,
+      "5": 6.154,
+      "6": 5.128333333333333,
+      "7": 0.6154,
+      "8": 2.197857142857143,
+      "9": 1.0989285714285715,
+      "10": 7.6925,
+      "11": 0.8097368421052632,
+      "12": 0.580566037735849,
+      "13": 0.7504878048780488,
+      "14": 2.366923076923077,
+      "15": 0.6689130434782609,
+      "16": 7.6925,
+      "17": 0.5698148148148148,
+      "18": 6.154,
+      "19": 0.6154,
+      "20": 1.2308,
+      "21": 0.6154,
+      "22": 6.154,
+      "23": 0.580566037735849,
+      "24": 0.580566037735849,
+      "25": 0.6410416666666666,
+      "26": 0.788974358974359,
+      "27": 2.7972727272727274,
+      "28": 0.6837777777777778,
+      "29": 1.7094444444444445,
+      "30": 7.6925,
+      "31": 0.7155813953488372,
+      "32": 0.905,
+      "33": 0.7504878048780488,
+      "34": 1.1834615384615386,
+      "35": 0.8547222222222223,
+      "36": 0.76925,
+      "37": 7.6925,
+      "38": 1.4652380952380952,
+      "39": 0.8097368421052632,
+      "40": 6.154,
+      "41": 0.8316216216216217,
+      "42": 1.2308,
+      "43": 0.7155813953488372,
+      "44": 3.418888888888889,
+      "45": 0.580566037735849,
+      "46": 3.418888888888889,
+      "47": 0.76925,
+      "48": 6.154,
+      "49": 0.6837777777777778,
+      "50": 1.0989285714285715,
+      "51": 0.8097368421052632,
+      "52": 0.5698148148148148,
+      "53": 0.580566037735849,
+      "54": 6.154,
+      "55": 0.5398245614035088,
+      "56": 6.154,
+      "57": 0.6410416666666666,
+      "58": 0.6837777777777778,
+      "59": 1.2820833333333332,
+      "60": 0.5698148148148148,
+      "61": 0.8791428571428571,
+      "62": 0.8316216216216217,
+      "63": 1.0610344827586207,
+      "64": 0.580566037735849,
+      "65": 0.8547222222222223,
+      "66": 7.6925,
+      "67": 0.5305172413793103,
+      "68": 2.5641666666666665,
+      "69": 0.5917307692307693,
+      "70": 0.8316216216216217,
+      "71": 7.6925,
+      "72": 0.6546808510638298,
+      "73": 3.418888888888889,
+      "74": 1.6194736842105264,
+      "75": 2.0513333333333335,
+      "76": 3.418888888888889,
+      "77": 5.128333333333333,
+      "78": 0.6837777777777778,
+      "79": 0.580566037735849,
+      "80": 0.7326190476190476,
+      "81": 1.6194736842105264,
+      "82": 0.6837777777777778,
+      "83": 0.5215254237288136,
+      "84": 1.5385,
+      "85": 7.6925,
+      "86": 5.128333333333333,
+      "87": 6.154,
+      "88": 0.6154,
+      "89": 7.6925,
+      "90": 2.366923076923077,
+      "91": 2.0513333333333335,
+      "92": 1.0256666666666667,
+      "93": 0.8097368421052632,
+      "94": 0.6546808510638298,
+      "95": 0.7155813953488372,
+      "96": 0.7155813953488372,
+      "97": 2.197857142857143,
+      "98": 0.6154,
+      "99": 0.7155813953488372
+    },
+    "weight_application": "TRAIN Dataset sample_weight once; VALID and metrics unweighted",
+    "cap_policy": "cap=N_train is inactive: N/(K*n_c) <= N for positive K,n_c",
+    "initialization_policy": "fresh M07/M08 initialization after original M09 set_seed; no old checkpoint",
+    "training_policy": {
+      "optimizer": "Adam",
+      "initial_learning_rate": 0.001,
+      "global_clipnorm": 1.0,
+      "callbacks": "ClassWeightTrainingControl inherits original val_loss counters",
+      "checkpoint_monitor": "val_loss",
+      "validation_weighted": false,
+      "oversampling": false,
+      "augmentation": "unchanged cached features"
+    },
+    "metric_policy": {
+      "average": "macro over all 100 mapping IDs",
+      "zero_division": 0,
+      "epoch_accumulation": "confusion counts, not batch means",
+      "precision": "TP/(TP+FP)",
+      "recall": "TP/(TP+FN)",
+      "weighted_metrics": false,
+      "history_columns": [
+        "macro_precision",
+        "macro_recall",
+        "val_macro_precision",
+        "val_macro_recall"
+      ]
+    },
+    "adapter_code_binding": {
+      "src/fusion_vsl/class_weight_experiment.py": "4b6276b159735ce74b620608514f69a8f1335e9873e66553397d52d7af50244d",
+      "scripts/10_train_cw.py": "3e8503e8646156a490e641832fbfcff133f55b3d8639e4a58124633e6d552ae1",
+      "src/fusion_vsl/class_weight_metrics.py": "e2811b2adbac0d69430ba1b0543bd813b302d9c728995ce9de2ac0c107b0f110",
+      "src/fusion_vsl/class_weight_training.py": "304f059f75bc8dc5f2f0cf5d43ebd641886382b567981d268436702200754469"
+    }
+  },
+  "data_binding": {
+    "manifest_sha256": "5bea643943b2f0597c75b74a0f1fa9fdfa5d5e77b97906aee578d967ddda7280",
+    "label_mapping_sha256": "5500b9b341038fe536902d4758d003ec21576b2bce996d112afc0ddb157b067d",
+    "aligned_manifest_sha256": "8cec0cab82c43b307f467532cd2eb13416d9ca7ce31c384e08871c89b87a06e6",
+    "recipes": {
+      "rgb": "8f4a0f6708f9668a8a09a70222115834ff3886f102fa8955f7c740e1452b8ea8",
+      "landmark": "5465fc6a51c9df2e1e17c44bd41e9049526b56db3eca7b9c6e4859a35a7ea774"
+    },
+    "split_csv_sha256": {
+      "train": "cc74c5a7b689f81441b168291301e61cd6eff4d78079557c2684aab152102f1e",
+      "valid": "24be089035dfba5c0d32a27e3c2d5730b04f59086ed10663ac84198ff6f3ce4c"
+    },
+    "selected_rows_sha256": "e0e8629f2369a8199fcb7aacc48d7e8a62f91cd38327d5ec51d6d0792e350ca4",
+    "test_used": false
+  },
+  "code_binding": {
+    "config.py": "824b038c838dcb9b686ee5af043c1b83ba0d4b8e214cc31de412f32184fdffd5",
+    "manifest.py": "f20d13222804d7aa8430ae5f567c10d7aebcaf0e25d2080a18c0f975432de1dd",
+    "feature_cache.py": "3ef19999d4af8c58353927873558af9eba0903744edea56884a85fb57d7ddde3",
+    "models.py": "3488dada9ab0875671779d1128870f76da745fb153f32ee99bd9dfd14750da6e",
+    "fusion_models.py": "7f7cf4d5ff6285c68006255c77cde8df886e11ce2e375adbdea8f6184b9a62b0",
+    "datasets.py": "82a4dc4a8ae3d0b3cea6fc9be86111addc752b0045194a7549a45e766735946f",
+    "training.py": "904872f562cb652ee754ff6c1dacfd270086132dd4856c6942b5904f61eed10f",
+    "training_config.py": "85380fdb5fc6cea49f734b43181a242ed2d4f2af123ccdaad76b92b1878d66af",
+    "training_data.py": "5f4c3d145ffed0003d1bdd75b4c14fc6aa2daaa94cda357f75488357d0554310",
+    "training_tracking.py": "a88f12b8bbfceb1fa2c575cc0390a2ad4eae9876a3dca39d30fbe0755b907447",
+    "training_callbacks.py": "ac48df094c8a3b7688052fd02296d13a31f4e90b237880c0c8822a8a4f4af4b1",
+    "training_metrics.py": "d316f74a1cca3bae981788d4748e75fc4bb4f5a45706f28fd1fc255fbeb2c556"
+  },
+  "runtime": {
+    "python": "3.12.3",
+    "tensorflow": "2.20.0",
+    "keras": "3.11.3",
+    "numpy": "1.26.4",
+    "platform": "Windows-11-10.0.26200-SP0",
+    "devices": [
+      "/physical_device:CPU:0"
+    ]
+  },
+  "seed_state": {
+    "seed": 42,
+    "python": true,
+    "numpy": true,
+    "tensorflow": "2.20.0",
+    "tf_op_determinism": true,
+    "pythonhashseed_environment": "42",
+    "pythonhashseed_note": "Only effective when set before interpreter startup."
+  },
+  "sample_weights": {
+    "0": 1.1834615384615386,
+    "1": 0.5398245614035088,
+    "2": 0.6410416666666666,
+    "3": 0.6154,
+    "4": 1.6194736842105264,
+    "5": 6.154,
+    "6": 5.128333333333333,
+    "7": 0.6154,
+    "8": 2.197857142857143,
+    "9": 1.0989285714285715,
+    "10": 7.6925,
+    "11": 0.8097368421052632,
+    "12": 0.580566037735849,
+    "13": 0.7504878048780488,
+    "14": 2.366923076923077,
+    "15": 0.6689130434782609,
+    "16": 7.6925,
+    "17": 0.5698148148148148,
+    "18": 6.154,
+    "19": 0.6154,
+    "20": 1.2308,
+    "21": 0.6154,
+    "22": 6.154,
+    "23": 0.580566037735849,
+    "24": 0.580566037735849,
+    "25": 0.6410416666666666,
+    "26": 0.788974358974359,
+    "27": 2.7972727272727274,
+    "28": 0.6837777777777778,
+    "29": 1.7094444444444445,
+    "30": 7.6925,
+    "31": 0.7155813953488372,
+    "32": 0.905,
+    "33": 0.7504878048780488,
+    "34": 1.1834615384615386,
+    "35": 0.8547222222222223,
+    "36": 0.76925,
+    "37": 7.6925,
+    "38": 1.4652380952380952,
+    "39": 0.8097368421052632,
+    "40": 6.154,
+    "41": 0.8316216216216217,
+    "42": 1.2308,
+    "43": 0.7155813953488372,
+    "44": 3.418888888888889,
+    "45": 0.580566037735849,
+    "46": 3.418888888888889,
+    "47": 0.76925,
+    "48": 6.154,
+    "49": 0.6837777777777778,
+    "50": 1.0989285714285715,
+    "51": 0.8097368421052632,
+    "52": 0.5698148148148148,
+    "53": 0.580566037735849,
+    "54": 6.154,
+    "55": 0.5398245614035088,
+    "56": 6.154,
+    "57": 0.6410416666666666,
+    "58": 0.6837777777777778,
+    "59": 1.2820833333333332,
+    "60": 0.5698148148148148,
+    "61": 0.8791428571428571,
+    "62": 0.8316216216216217,
+    "63": 1.0610344827586207,
+    "64": 0.580566037735849,
+    "65": 0.8547222222222223,
+    "66": 7.6925,
+    "67": 0.5305172413793103,
+    "68": 2.5641666666666665,
+    "69": 0.5917307692307693,
+    "70": 0.8316216216216217,
+    "71": 7.6925,
+    "72": 0.6546808510638298,
+    "73": 3.418888888888889,
+    "74": 1.6194736842105264,
+    "75": 2.0513333333333335,
+    "76": 3.418888888888889,
+    "77": 5.128333333333333,
+    "78": 0.6837777777777778,
+    "79": 0.580566037735849,
+    "80": 0.7326190476190476,
+    "81": 1.6194736842105264,
+    "82": 0.6837777777777778,
+    "83": 0.5215254237288136,
+    "84": 1.5385,
+    "85": 7.6925,
+    "86": 5.128333333333333,
+    "87": 6.154,
+    "88": 0.6154,
+    "89": 7.6925,
+    "90": 2.366923076923077,
+    "91": 2.0513333333333335,
+    "92": 1.0256666666666667,
+    "93": 0.8097368421052632,
+    "94": 0.6546808510638298,
+    "95": 0.7155813953488372,
+    "96": 0.7155813953488372,
+    "97": 2.197857142857143,
+    "98": 0.6154,
+    "99": 0.7155813953488372
+  },
+  "monitor": "val_loss",
+  "test_used": false
+}

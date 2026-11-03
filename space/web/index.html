@@ -1,0 +1,473 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#087f72">
+<title>VSL Studio · Nhận dạng ngôn ngữ ký hiệu</title>
+<style>
+:root { color-scheme:light; --bg:#f5f7f9; --panel:#fff; --text:#182d35; --muted:#697b83; --line:#e5ecef; --accent:#087f72; --ok:#087f72; --warn:#a46414; --rec:#da5261; --bar:#edf3f3; }
+* { box-sizing:border-box; }
+html { scroll-behavior:smooth; scroll-padding-top:24px; }
+body { margin:0; background:var(--bg); color:var(--text); font:14px/1.6 "Segoe UI",-apple-system,BlinkMacSystemFont,Arial,sans-serif; }
+button { font:inherit; cursor:pointer; }
+button:disabled { opacity:.5; cursor:not-allowed; }
+a { color:inherit; }
+button,a,summary { touch-action:manipulation; -webkit-tap-highlight-color:transparent; }
+:focus-visible { outline:3px solid #58b7a9; outline-offset:4px; }
+.icon { width:20px; height:20px; fill:none; stroke:currentColor; stroke-width:1.7; stroke-linecap:round; stroke-linejoin:round; flex-shrink:0; }
+.symbols { position:absolute; width:0; height:0; overflow:hidden; }
+.app-header { height:78px; background:#fff; border-bottom:1px solid var(--line); }
+.header-inner,main,.footer-inner { max-width:1264px; margin:0 auto; padding-left:36px; padding-right:36px; }
+.header-inner { height:100%; display:flex; align-items:center; justify-content:space-between; gap:20px; }
+.brand { display:flex; align-items:center; gap:11px; text-decoration:none; }
+.brand-mark { width:40px; height:40px; border-radius:13px; display:grid; place-items:center; color:#fff; background:var(--accent); }
+.brand-mark .icon { width:25px; height:25px; }
+.brand-name { font-size:20px; letter-spacing:-.7px; font-weight:750; line-height:1.2; }
+.brand-name span { font-weight:400; color:var(--muted); }
+.brand-caption { color:var(--muted); font-size:10px; letter-spacing:1.6px; margin-top:3px; }
+.header-right { display:flex; align-items:center; gap:25px; }
+.header-link { display:flex; align-items:center; gap:7px; text-decoration:none; font-size:13px; color:var(--muted); }
+.header-link:hover { color:var(--accent); }
+.course-badge { border:1px solid var(--line); background:#f9fbfc; color:#586b74; padding:5px 11px; border-radius:7px; font-size:11px; font-weight:650; letter-spacing:.6px; }
+main { padding-top:34px; padding-bottom:40px; }
+.intro { display:flex; justify-content:space-between; align-items:center; gap:28px; margin-bottom:26px; }
+.eyebrow { margin:0 0 7px; color:var(--accent); font-size:10px; font-weight:750; letter-spacing:1.7px; text-transform:uppercase; }
+h1 { margin:0; font-size:clamp(26px,3vw,36px); letter-spacing:-1.3px; line-height:1.3; font-weight:750; }
+h1 span { color:var(--accent); }
+.intro-copy { margin:9px 0 0; font-size:13px; color:var(--muted); }
+.model-tag { display:flex; align-items:center; gap:10px; border:1px solid var(--line); border-radius:12px; padding:11px 15px; background:#ffffffb3; flex-shrink:0; }
+.model-tag>.icon { color:var(--accent); width:24px; height:24px; }
+.model-tag strong { font-size:12px; display:block; font-weight:650; }
+.model-tag small { color:var(--muted); font-size:11px; display:block; }
+.model-tag label { font-size:9px; text-transform:uppercase; letter-spacing:1.1px; color:var(--muted); font-weight:650; display:block; }
+#model-select { font:inherit; font-size:12px; font-weight:650; color:var(--text); border:1px solid var(--line); border-radius:7px; background:#fff; padding:4px 8px; margin:2px 0; max-width:100%; }
+.grid { display:grid; grid-template-columns:minmax(0,1.65fr) minmax(305px,1fr); align-items:stretch; gap:22px; }
+.panel { background:#fff; border:1px solid var(--line); border-radius:18px; box-shadow:0 4px 16px #203c4803; min-width:0; }
+.panel-head { display:flex; align-items:center; justify-content:space-between; gap:12px; padding:19px 22px; }
+.panel-title { display:flex; align-items:center; gap:9px; }
+.panel-title>.icon { color:var(--accent); width:18px; height:18px; }
+h2 { margin:0; font-size:14px; font-weight:650; letter-spacing:-.2px; }
+.pill { display:inline-flex; align-items:center; gap:6px; font-size:10px; line-height:1.5; font-weight:650; border-radius:20px; padding:5px 9px; background:#f1f4f6; color:var(--muted); white-space:nowrap; }
+.dot { width:6px; height:6px; border-radius:50%; background:currentColor; flex-shrink:0; }
+.pill.ready,.pill.success { background:#eaf6f2; color:var(--accent); }
+.pill.count,.pill.low { background:#fff4df; color:var(--warn); }
+.pill.rec,.pill.error { background:#fff0f1; color:#bd3d4e; }
+.camera-panel { padding-bottom:19px; }
+.camera-wrap { padding:0 14px; }
+.cam { position:relative; background:#14252b; border-radius:12px; overflow:hidden; aspect-ratio:4/3; isolation:isolate; }
+video { width:100%; height:100%; object-fit:contain; transform:scaleX(-1); display:block; }
+.cam.flipped video { transform:none; }
+.camera-placeholder { position:absolute; inset:0; display:flex; align-items:center; justify-content:center; flex-direction:column; background:radial-gradient(ellipse at 50% 40%,#244148 0,#14252b 70%); padding:35px; text-align:center; color:#e2eeed; }
+.camera-placeholder[hidden] { display:none; }
+.placeholder-art { width:145px; height:145px; color:#668f93; margin-bottom:15px; }
+.camera-placeholder strong { font-size:15px; font-weight:550; }
+.camera-placeholder p { max-width:270px; font-size:12px; color:#9ab0b5; margin:6px 0 0; }
+.camera-label { position:absolute; top:15px; left:15px; display:flex; align-items:center; gap:7px; color:#dbe6e7; background:#14252bb3; border:1px solid #ffffff17; backdrop-filter:blur(8px); border-radius:6px; padding:5px 9px; font-size:9px; letter-spacing:1px; z-index:2; }
+.camera-label .dot { color:#8aa7a9; }
+body[data-phase="ready"] .camera-label .dot { color:#72d4b4; }
+body[data-phase="rec"] .camera-label .dot { color:#ff7b85; animation:pulse 1s infinite; }
+.camera-resolution { position:absolute; top:17px; right:16px; color:#c0d2d5; font-size:10px; z-index:2; }
+#guide { position:absolute; pointer-events:none; border:1px solid #a8e4d54d; border-radius:8px; display:none; }
+#guide::after { content:""; position:absolute; inset:-1px; border:2px solid #9cdec9; border-radius:8px; clip-path:polygon(0 0,9% 0,9% 1%,91% 1%,91% 0,100% 0,100% 9%,99% 9%,99% 91%,100% 91%,100% 100%,91% 100%,91% 99%,9% 99%,9% 100%,0 100%,0 91%,1% 91%,1% 9%,0 9%); }
+#guide.count::after { border-color:#f6ce84; }
+#guide.rec::after { border-color:#ff7b85; }
+#overlay { position:absolute; inset:0; display:flex; align-items:center; justify-content:center; font-size:88px; font-weight:700; color:#fff; text-shadow:0 2px 24px #0008; pointer-events:none; }
+#overlay:not(:empty) { background:#13242b33; backdrop-filter:blur(2px); }
+.camera-bottom { position:absolute; bottom:16px; left:12px; right:12px; display:flex; justify-content:center; }
+#camera-tip { max-width:100%; border-radius:20px; padding:6px 12px; color:#dae5e6; font-size:10px; text-align:center; background:#10252cbf; backdrop-filter:blur(8px); }
+#progress { position:absolute; left:0; bottom:0; height:4px; width:0; background:#ff7b85; transition:width 70ms linear; }
+.controls { display:flex; align-items:center; flex-wrap:wrap; gap:10px; padding:17px 22px 0; }
+.primary-btn,.secondary-btn { display:inline-flex; align-items:center; justify-content:center; gap:8px; border-radius:9px; font-size:12px; font-weight:650; min-height:42px; padding:10px 15px; transition:background .18s,transform .18s; }
+.primary-btn { background:var(--accent); color:white; border:1px solid var(--accent); box-shadow:0 3px 6px #087f7215; }
+.primary-btn:hover:not(:disabled) { background:#06665c; transform:translateY(-1px); }
+.primary-btn .icon,.secondary-btn .icon { width:15px; height:15px; }
+.secondary-btn { margin-left:auto; background:white; color:#647780; border:1px solid var(--line); }
+.secondary-btn ~ .secondary-btn { margin-left:0; }
+.secondary-btn[aria-pressed="true"] { background:#eaf6f2; color:var(--accent); border-color:#bfe0d6; }
+.secondary-btn:hover:not(:disabled) { background:#f4f8f7; }
+.shortcut { color:#8a979d; font-size:10px; display:flex; align-items:center; gap:5px; }
+kbd { font-family:inherit; font-size:9px; background:#f8fafb; border:1px solid #dfe7eb; border-bottom-width:2px; border-radius:4px; padding:1px 6px; color:#61727a; }
+#status { font-size:11px; color:var(--muted); margin:11px 22px 0; min-height:18px; overflow-wrap:anywhere; }
+#status.err { color:#b23d4d; }
+.results-panel { display:flex; flex-direction:column; }
+.result-content { padding:0 22px 20px; flex:1; display:flex; flex-direction:column; }
+.prediction { background:#f3f9f7; border:1px solid #e1efea; border-radius:12px; padding:21px 19px 17px; }
+.label { font-size:9px; text-transform:uppercase; letter-spacing:1.1px; color:var(--muted); font-weight:650; }
+#word { font-size:clamp(25px,2.7vw,35px); line-height:1.3; font-weight:750; color:#06665c; letter-spacing:-.8px; margin:8px 0 14px; overflow-wrap:anywhere; }
+#word.empty { color:#7c9c95; font-size:26px; font-weight:550; }
+#word.low { color:var(--warn); }
+.confidence { display:flex; align-items:center; justify-content:space-between; font-size:11px; color:#708780; }
+#confidence { font-size:15px; color:var(--accent); font-weight:700; font-variant-numeric:tabular-nums; }
+.confidence-track { height:4px; background:#dcebe6; border-radius:5px; margin-top:9px; overflow:hidden; }
+#confidence-bar { display:block; height:100%; width:0; background:var(--accent); border-radius:inherit; transition:width .5s ease; }
+.prediction.low { background:#fffbf1; border-color:#f4e7ca; }
+.prediction.low #confidence { color:var(--warn); }
+.prediction.low #confidence-bar { background:var(--warn); }
+.ranking-head { display:flex; align-items:center; justify-content:space-between; margin:23px 0 14px; }
+.ranking-head h3 { margin:0; font-size:11px; font-weight:650; }
+.ranking-head span { color:#829199; font-size:9px; }
+#top { min-height:191px; }
+.row { margin-bottom:13px; }
+.row .t { display:flex; align-items:center; justify-content:space-between; gap:10px; font-size:11px; }
+.candidate { display:flex; align-items:center; gap:9px; min-width:0; }
+.rank { font-size:9px; color:#85959e; width:15px; flex-shrink:0; font-variant-numeric:tabular-nums; }
+.candidate-name { overflow-wrap:anywhere; }
+.probability { color:#687b83; font-size:10px; font-variant-numeric:tabular-nums; white-space:nowrap; }
+.row .b { height:4px; background:#f0f4f5; border-radius:3px; overflow:hidden; margin:6px 0 0 24px; }
+.row .b i { display:block; height:100%; background:#b4d7ce; border-radius:inherit; }
+.row:first-child .b i { background:var(--accent); }
+.row:first-child .candidate-name { font-weight:650; color:var(--accent); }
+.skeleton .candidate-name { width:90px; height:7px; background:#eef2f4; border-radius:4px; }
+.skeleton:nth-child(2n) .candidate-name { width:65px; }
+.skeleton .probability { color:#c6d0d5; }
+.empty-note { font-size:10px; color:#798d97; text-align:center; margin:0 0 17px; }
+#meta { border-top:1px solid var(--line); padding-top:14px; margin-top:auto; display:grid; grid-template-columns:1fr 1fr; gap:12px; }
+.meta-item { display:flex; align-items:center; gap:8px; }
+.meta-item .icon { color:#91a4ad; width:17px; height:17px; }
+.meta-item small { display:block; font-size:9px; color:#84949c; }
+.meta-item strong { display:block; font-size:11px; font-weight:600; color:#526a74; }
+.steps { display:grid; grid-template-columns:repeat(3,1fr); gap:20px; margin:22px 0; padding:18px 24px; border:1px solid var(--line); border-radius:13px; background:#ffffff99; }
+.step { display:flex; align-items:center; gap:12px; }
+.step-number { width:29px; height:29px; display:grid; place-items:center; border-radius:50%; color:#72948c; background:#edf4f1; font-size:10px; font-weight:700; flex-shrink:0; }
+.step.active .step-number { background:var(--accent); color:white; box-shadow:0 0 0 4px #087f720b; }
+.step strong { display:block; font-size:11px; font-weight:650; }
+.step p { margin:2px 0 0; font-size:10px; color:var(--muted); }
+.motion-panel { padding-bottom:19px; }
+.section-subtitle { color:var(--muted); margin:2px 0 0; font-size:10px; }
+.motion-badge { color:#788b94; font-size:9px; font-weight:600; padding:4px 8px; background:#f4f7f9; border:1px solid var(--line); border-radius:5px; white-space:nowrap; }
+#diffs { display:grid; grid-template-columns:repeat(8,minmax(0,1fr)); gap:10px; padding:0 22px; }
+#diffs figure { margin:0; min-width:0; }
+#diffs img { width:100%; height:auto; aspect-ratio:1; display:block; border-radius:7px; background:#102127; transform:scaleX(-1); }
+#diffs figcaption { margin-top:5px; font-size:9px; color:#8a9aa2; text-align:center; font-variant-numeric:tabular-nums; }
+.motion-empty { grid-column:1/-1; min-height:104px; border:1px dashed #dce6e9; border-radius:10px; background:#fafcfc; display:flex; align-items:center; justify-content:center; gap:14px; padding:20px; }
+.motion-empty>.icon { width:32px; height:32px; color:#9ab9b1; }
+.motion-empty strong { color:#71868f; font-size:11px; font-weight:550; }
+.motion-empty p { color:#84969e; font-size:10px; margin:3px 0 0; }
+.tips { margin-top:22px; border:1px solid #e3ece8; border-radius:13px; background:#eff5f2; padding:17px 22px; }
+.tips summary { display:flex; align-items:center; justify-content:space-between; gap:12px; cursor:pointer; list-style:none; color:#416e61; font-size:12px; font-weight:650; }
+.tips summary::-webkit-details-marker { display:none; }
+.tips summary>span { display:flex; align-items:center; gap:9px; }
+.tips summary .icon { width:17px; height:17px; }
+.chevron { transition:transform .2s; }
+.tips[open] .chevron { transform:rotate(180deg); }
+.tips-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:25px; padding-top:17px; }
+.tip { display:flex; align-items:flex-start; gap:9px; }
+.tip>.icon { width:17px; height:17px; color:#679082; margin-top:2px; }
+.tip h3 { font-size:11px; font-weight:650; margin:0 0 4px; color:#42685d; }
+.tip p { font-size:10px; color:#6c847a; margin:0; }
+footer { border-top:1px solid var(--line); }
+.footer-inner { padding-top:18px; padding-bottom:21px; display:flex; justify-content:space-between; gap:16px; font-size:10px; color:#81939d; }
+.footer-inner strong { font-weight:600; color:#7b8e97; }
+@keyframes pulse { 50% { opacity:.35; } }
+@media(max-width:980px) {
+.header-inner,main,.footer-inner { padding-left:24px; padding-right:24px; }
+.grid { grid-template-columns:minmax(0,1.35fr) minmax(285px,1fr); gap:16px; }
+.shortcut { display:none; }
+.panel-head { padding:17px; }
+.result-content { padding-left:17px; padding-right:17px; }
+.controls { padding-left:17px; padding-right:17px; }
+#status { margin-left:17px; margin-right:17px; }
+.steps { padding:17px; gap:12px; }
+.step { gap:9px; }
+.camera-placeholder { padding:36px 20px 44px; }
+.placeholder-art { width:64px; height:64px; margin-bottom:8px; }
+.camera-placeholder strong { font-size:13px; }
+.camera-placeholder p { font-size:11px; margin-top:4px; }
+}
+@media(max-width:740px) {
+.header-inner,main,.footer-inner { padding-left:16px; padding-right:16px; }
+.app-header { height:69px; }
+.brand-name { font-size:18px; }
+.brand-caption { font-size:8px; }
+.header-right { gap:13px; }
+.header-link { font-size:0; gap:0; }
+main { padding-top:26px; }
+.intro { margin-bottom:22px; flex-direction:column; align-items:stretch; }
+#model-select { width:100%; }
+h1 { letter-spacing:-.8px; }
+.intro-copy { max-width:360px; font-size:12px; }
+.grid { grid-template-columns:minmax(0,1fr); gap:16px; }
+.steps { grid-template-columns:1fr; gap:16px; padding:18px; }
+.step p { font-size:11px; }
+.step strong { font-size:12px; }
+#word { font-size:30px; }
+.ranking-head h3,.row .t { font-size:12px; }
+#top { min-height:180px; }
+.tips-grid { grid-template-columns:1fr; gap:18px; }
+.tip h3 { font-size:12px; }
+.tip p { font-size:11px; }
+#diffs { grid-template-columns:repeat(4,minmax(0,1fr)); gap:9px; padding:0 17px; }
+.motion-empty { justify-content:flex-start; }
+.motion-empty>.icon { width:26px; height:26px; }
+.section-subtitle { max-width:230px; }
+.motion-badge { display:none; }
+.footer-inner { flex-direction:column; gap:3px; }
+}
+@media(max-width:380px) { .placeholder-art { display:none; } }
+@media(prefers-reduced-motion:reduce) { html { scroll-behavior:auto; } *,*::before,*::after { animation:none !important; transition:none !important; } }
+</style>
+</head>
+<body data-phase="starting">
+<svg class="symbols" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+<symbol id="i-hand" viewBox="0 0 24 24"><path d="M8 13V5.5a1.5 1.5 0 0 1 3 0V12M11 11V3.5a1.5 1.5 0 0 1 3 0V12M14 11V5a1.5 1.5 0 0 1 3 0v8M17 11V8a1.5 1.5 0 0 1 3 0v7c0 4-2.5 7-6 7h-1c-2.5 0-4-1-5.5-3L3 13a1.5 1.5 0 0 1 2.3-1.9L8 14"/></symbol>
+<symbol id="i-camera" viewBox="0 0 24 24"><rect x="3" y="6" width="13" height="13" rx="3"/><path d="m16 10 5-3v11l-5-3"/></symbol>
+<symbol id="i-spark" viewBox="0 0 24 24"><path d="m12 3 2.5 6.5L21 12l-6.5 2.5L12 21l-2.5-6.5L3 12l6.5-2.5L12 3Z"/></symbol>
+<symbol id="i-help" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M9.5 9a2.5 2.5 0 0 1 5 .4c0 1.8-2.5 2-2.5 3.6M12 16.5h.01"/></symbol>
+<symbol id="i-chip" viewBox="0 0 24 24"><rect x="6" y="6" width="12" height="12" rx="3"/><path d="M10 10h4v4h-4zM9 3v3m6-3v3M9 18v3m6-3v3M3 9h3m-3 6h3M18 9h3m-3 6h3"/></symbol>
+<symbol id="i-record" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="3" fill="currentColor" stroke="none"/></symbol>
+<symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><path d="M12 7v5l3 2"/></symbol>
+<symbol id="i-frames" viewBox="0 0 24 24"><rect x="7" y="7" width="14" height="14" rx="3"/><path d="M16 3H6a3 3 0 0 0-3 3v10m8-4 3 3 3-3"/></symbol>
+<symbol id="i-motion" viewBox="0 0 24 24"><path d="M2 12h4l3-7 5 14 3-7h5"/></symbol>
+<symbol id="i-light" viewBox="0 0 24 24"><circle cx="12" cy="10" r="5"/><path d="M10 15v3h4v-3M10 21h4M12 1V0M3 4 2 3m19 1 1-1M3 11H1m22 0h-2"/></symbol>
+<symbol id="i-person" viewBox="0 0 24 24"><circle cx="12" cy="7" r="3"/><path d="M5 21v-3a7 7 0 0 1 14 0v3M3 3V1h3m12 0h3v2"/></symbol>
+<symbol id="i-check" viewBox="0 0 24 24"><path d="m5 12 4 4L19 6"/></symbol>
+<symbol id="i-flip" viewBox="0 0 24 24"><path d="M12 3v18M9 7 4 17h5V7Zm6 0 5 10h-5V7Z"/></symbol>
+<symbol id="i-chevron" viewBox="0 0 24 24"><path d="m7 10 5 5 5-5"/></symbol>
+</svg>
+<header class="app-header"><div class="header-inner">
+<a class="brand" href="#" aria-label="VSL Studio, trang đầu"><span class="brand-mark"><svg class="icon" aria-hidden="true"><use href="#i-hand"/></svg></span><div><div class="brand-name">VSL <span>Studio</span></div><div class="brand-caption">VIETNAMESE SIGN LANGUAGE</div></div></a>
+<div class="header-right"><a class="header-link" href="#huong-dan"><svg class="icon" aria-hidden="true"><use href="#i-help"/></svg>Hướng dẫn sử dụng</a><span class="course-badge">DAT301m</span></div>
+</div></header>
+<main>
+<div class="intro"><div><p class="eyebrow">TRẢI NGHIỆM NGÔN NGỮ KÝ HIỆU VIỆT NAM</p><h1>Để đôi tay <span>lên tiếng.</span></h1><p class="intro-copy">Thực hiện một ký hiệu trước webcam và khám phá cách AI hiểu chuyển động của bạn.</p></div><div class="model-tag"><svg class="icon" aria-hidden="true"><use href="#i-chip"/></svg><div><label for="model-select">Mô hình</label><select id="model-select" disabled><option>Đang tải…</option></select><small id="model-desc">100 từ &amp; cụm từ tiếng Việt</small></div></div></div>
+<div class="grid">
+<section class="panel camera-panel" aria-labelledby="camera-title">
+<div class="panel-head"><div class="panel-title"><svg class="icon" aria-hidden="true"><use href="#i-camera"/></svg><h2 id="camera-title">Không gian thực hiện</h2></div><span class="pill" id="camera-state"><span class="dot"></span><span id="camera-state-text">Đang kết nối</span></span></div>
+<div class="camera-wrap"><div class="cam" id="cam">
+<video id="video" autoplay playsinline muted aria-label="Hình ảnh trực tiếp từ webcam, hiển thị phản chiếu"></video>
+<div class="camera-placeholder" id="camera-placeholder"><svg class="placeholder-art" viewBox="0 0 160 160" fill="none" aria-hidden="true"><rect x="8" y="8" width="144" height="144" rx="24" stroke="currentColor" stroke-opacity=".18"/><path d="M9 45V25A16 16 0 0 1 25 9h20m70 0h20a16 16 0 0 1 16 16v20M9 115v20a16 16 0 0 0 16 16h20m70 0h20a16 16 0 0 0 16-16v-20" stroke="currentColor" stroke-width="2"/><circle cx="80" cy="59" r="19" stroke="currentColor" stroke-width="2"/><path d="M43 125v-7a37 37 0 0 1 74 0v7" stroke="currentColor" stroke-width="2"/><path d="M32 80h96" stroke="currentColor" stroke-opacity=".25" stroke-dasharray="3 5"/></svg><strong id="placeholder-title">Sẵn sàng cho ký hiệu đầu tiên</strong><p id="placeholder-copy">Cho phép truy cập camera để bắt đầu trải nghiệm ký hiệu của bạn.</p></div>
+<div class="camera-label"><span class="dot"></span><span id="live-label">WEBCAM</span></div><span class="camera-resolution" id="resolution"></span><div id="guide"></div><div id="overlay" aria-hidden="true"></div><div class="camera-bottom"><span id="camera-tip">Đặt đầu, vai và hai tay trong khung hình</span></div><div id="progress" role="progressbar" aria-label="Tiến trình ghi ký hiệu" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"></div>
+</div></div>
+<div class="controls"><button class="primary-btn" id="btn" disabled><svg class="icon" aria-hidden="true"><use href="#i-record"/></svg><span id="btn-text">Ghi ký hiệu</span></button><span class="shortcut">hoặc nhấn <kbd>Space</kbd></span><button class="secondary-btn" id="flip-btn" aria-pressed="false" title="Lật hình camera theo chiều trái – phải"><svg class="icon" aria-hidden="true"><use href="#i-flip"/></svg><span>Lật trái phải</span></button><button class="secondary-btn" id="camera-btn" disabled><svg class="icon" aria-hidden="true"><use href="#i-camera"/></svg><span id="camera-btn-text">Bật camera</span></button></div>
+<p id="status" role="status" aria-live="polite">Đang kết nối với webcam của bạn…</p>
+</section>
+<section class="panel results-panel" aria-labelledby="result-title" id="results" aria-busy="false">
+<div class="panel-head"><div class="panel-title"><svg class="icon" aria-hidden="true"><use href="#i-spark"/></svg><h2 id="result-title">Kết quả nhận dạng</h2></div><span class="pill" id="result-state">Chờ ký hiệu</span></div>
+<div class="result-content"><div class="prediction" id="prediction" aria-live="polite" aria-atomic="true"><div class="label">Ký hiệu được dự đoán</div><div id="word" class="empty">Chờ bạn thể hiện…</div><div class="confidence"><span>Độ tin cậy</span><strong id="confidence">—</strong></div><div class="confidence-track"><i id="confidence-bar"></i></div></div>
+<div class="ranking-head"><h3>5 dự đoán hàng đầu</h3><span>Xác suất</span></div><div id="top" aria-label="Danh sách dự đoán"></div><p class="empty-note" id="result-note">Kết quả sẽ xuất hiện sau khi bạn ghi một ký hiệu.</p>
+<div id="meta"><div class="meta-item"><svg class="icon" aria-hidden="true"><use href="#i-frames"/></svg><div><small>Khung hình đã ghi</small><strong id="frame-count">—</strong></div></div><div class="meta-item"><svg class="icon" aria-hidden="true"><use href="#i-clock"/></svg><div><small>Thời gian xử lý</small><strong id="inference-time">—</strong></div></div></div>
+</div></section>
+</div>
+<div class="steps" aria-label="Các bước sử dụng"><div class="step active" id="step-1"><span class="step-number">01</span><div><strong>Vào khung hình</strong><p>Để thấy rõ nửa thân trên và hai tay.</p></div></div><div class="step" id="step-2"><span class="step-number">02</span><div><strong>Thực hiện ký hiệu</strong><p id="step-2-copy">Chuẩn bị 3 giây, ghi trong khoảng 2,3 giây.</p></div></div><div class="step" id="step-3"><span class="step-number">03</span><div><strong>Khám phá kết quả</strong><p>Xem từ dự đoán và độ tin cậy của mô hình.</p></div></div></div>
+<section class="panel motion-panel" id="motion-panel" aria-labelledby="motion-title"><div class="panel-head"><div><div class="panel-title"><svg class="icon" aria-hidden="true"><use href="#i-motion"/></svg><h2 id="motion-title">Chuyển động qua góc nhìn AI</h2></div><p class="section-subtitle" id="motion-note">Những vùng sáng thể hiện thay đổi giữa các khung hình.</p></div><span class="motion-badge" id="motion-badge">16 BƯỚC · FRAME DIFFERENCE</span></div><div id="diffs"><div class="motion-empty"><svg class="icon" aria-hidden="true"><use href="#i-frames"/></svg><div><strong>Khám phá dấu vết chuyển động</strong><p>Ghi một ký hiệu để xem chuỗi ảnh chuyển động mà mô hình nhận vào.</p></div></div></div></section>
+<details class="tips" id="huong-dan" open><summary><span><svg class="icon" aria-hidden="true"><use href="#i-light"/></svg>Một vài mẹo cho kết quả tốt hơn</span><svg class="icon chevron" aria-hidden="true"><use href="#i-chevron"/></svg></summary><div class="tips-grid"><div class="tip"><svg class="icon" aria-hidden="true"><use href="#i-light"/></svg><div><h3>Chọn nơi đủ sáng</h3><p>Nền đơn giản, ánh sáng phía trước giúp đôi tay và chuyển động hiện rõ.</p></div></div><div class="tip"><svg class="icon" aria-hidden="true"><use href="#i-person"/></svg><div><h3>Giữ trọn trong khung hình</h3><p>Đặt đầu và hai tay trong khung vuông. Giữ camera và thân người ổn định.</p></div></div><div class="tip"><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><div><h3>Mỗi lần, một ký hiệu</h3><p>Bắt đầu ở tư thế nghỉ, thực hiện trọn một từ khi thanh ghi hình chạy.</p></div></div></div></details>
+</main>
+<footer><div class="footer-inner"><span><strong>VSL Studio</strong> · Dự án nhận dạng ngôn ngữ ký hiệu Việt Nam</span><span id="footer-model">Frame Difference + MobileNetV2 · Temporal Average Pooling</span></div></footer>
+<script>
+const COUNTDOWN = 3, MAX_SIDE = 480, PROB_OK = 0.5;
+let FPS = 13, N_FRAMES = 30, models = [], model = null;
+const $ = (id) => document.getElementById(id);
+const video = $("video"), guide = $("guide"), overlay = $("overlay"), progress = $("progress");
+const btn = $("btn"), cameraBtn = $("camera-btn"), flipBtn = $("flip-btn"), status = $("status");
+let busy = false, stream = null, cameraStarting = false, flipped = false;
+const select = $("model-select");
+
+const seconds = () => (N_FRAMES / FPS).toFixed(1).replace(".", ",");
+function useModel(id) {
+  model = models.find((m) => m.id === id) || models[0];
+  select.value = model.id;
+  FPS = model.capture.fps; N_FRAMES = model.capture.frames;
+  $("model-desc").textContent = model.description;
+  $("footer-model").textContent = model.title;
+  $("step-2-copy").textContent = "Chuẩn bị " + COUNTDOWN + " giây, ghi trong khoảng " + seconds() + " giây.";
+  $("motion-panel").hidden = !model.visual;
+  if (model.visual) { $("motion-badge").textContent = model.visual; $("motion-note").textContent = model.visual_note || ""; }
+  try { localStorage.setItem("vsl-model", model.id); } catch {}
+}
+async function loadModels() {
+  try {
+    const response = await fetch("/models");
+    models = (await response.json()).models;
+    if (!Array.isArray(models) || !models.length) throw new Error();
+  } catch { select.replaceChildren(new Option("Không tải được danh sách mô hình")); return; }
+  select.replaceChildren(...models.map((m) => new Option(m.title, m.id)));
+  let saved = null;
+  try { saved = localStorage.getItem("vsl-model"); } catch {}
+  useModel(saved);
+  select.disabled = busy;
+}
+select.addEventListener("change", () => useModel(select.value));
+// Lật trái – phải cả frame gửi cho mô hình lẫn hình hiển thị (hiển thị luôn là ảnh gương của frame gửi đi).
+function setFlipped(on) {
+  flipped = on;
+  $("cam").classList.toggle("flipped", on);
+  flipBtn.setAttribute("aria-pressed", String(on));
+  try { localStorage.setItem("vsl-flip", on ? "1" : "0"); } catch {}
+}
+flipBtn.addEventListener("click", () => { if (!busy) setFlipped(!flipped); });
+try { setFlipped(localStorage.getItem("vsl-flip") === "1"); } catch {}
+
+function setStatus(message, error = false) { status.textContent = message; status.classList.toggle("err", error); }
+function setPhase(phase, label, step = 1) {
+  document.body.dataset.phase = phase;
+  $("camera-state").className = "pill " + phase;
+  $("camera-state-text").textContent = label;
+  for (let n = 1; n <= 3; n++) {
+    $("step-" + n).classList.toggle("active", n === step);
+    if (n === step) $("step-" + n).setAttribute("aria-current", "step");
+    else $("step-" + n).removeAttribute("aria-current");
+  }
+  $("live-label").textContent = phase === "rec" ? "ĐANG GHI" : stream ? "CAMERA TRỰC TIẾP" : "WEBCAM";
+}
+// Match the exact center crop sent to the model, accounting for letterboxing.
+function placeGuide() {
+  const vw = video.videoWidth, vh = video.videoHeight;
+  if (!vw || !vh || !stream) return;
+  const box = $("cam").getBoundingClientRect(), scale = Math.min(box.width / vw, box.height / vh);
+  const side = Math.min(vw, vh) * scale;
+  guide.style.width = guide.style.height = side + "px";
+  guide.style.left = (box.width - side) / 2 + "px";
+  guide.style.top = (box.height - side) / 2 + "px";
+  guide.style.display = "block";
+}
+function cameraUnavailable(message, error = false) {
+  if (stream) stream.getTracks().forEach((track) => track.stop());
+  stream = null; video.srcObject = null; btn.disabled = true;
+  guide.style.display = "none";
+  $("camera-placeholder").hidden = false;
+  $("placeholder-title").textContent = error ? "Camera chưa thể kết nối" : "Camera đang tắt";
+  $("placeholder-copy").textContent = error ? "Kiểm tra quyền truy cập camera, sau đó nhấn Bật camera để thử lại." : "Bật camera khi bạn sẵn sàng thực hiện ký hiệu tiếp theo.";
+  $("camera-btn-text").textContent = "Bật camera";
+  $("resolution").textContent = "";
+  $("camera-tip").textContent = "Đặt đầu, vai và hai tay trong khung hình";
+  setPhase(error ? "error" : "idle", error ? "Chưa kết nối" : "Camera đã tắt");
+  setStatus(message, error);
+}
+async function startCamera() {
+  if (cameraStarting || stream) return;
+  cameraStarting = true; cameraBtn.disabled = true;
+  setPhase("starting", "Đang kết nối");
+  setStatus("Đang kết nối webcam. Hãy cho phép truy cập camera nếu trình duyệt yêu cầu.");
+  try {
+    if (!navigator.mediaDevices?.getUserMedia) throw new Error("Trình duyệt cần hỗ trợ camera và trang phải được mở qua localhost hoặc HTTPS.");
+    stream = await navigator.mediaDevices.getUserMedia({ video: { width: 640, height: 480 }, audio: false });
+    video.srcObject = stream;
+    await video.play();
+    if (!stream.active) throw new Error("Kết nối camera bị gián đoạn.");
+    $("camera-placeholder").hidden = true;
+    placeGuide();
+    $("resolution").textContent = video.videoWidth + " × " + video.videoHeight;
+    $("camera-btn-text").textContent = "Tắt camera";
+    btn.disabled = false;
+    stream.getVideoTracks()[0].addEventListener("ended", () => cameraUnavailable("Camera đã ngắt kết nối. Bật lại camera để tiếp tục.", true));
+    setPhase("ready", "Sẵn sàng");
+    setStatus("Vào khung hình rồi nhấn Ghi ký hiệu. Bạn sẽ có 3 giây để chuẩn bị.");
+  } catch (error) {
+    let message = error.message;
+    if (error.name === "NotAllowedError") message = "Bạn cần cho phép truy cập camera trong trình duyệt, rồi nhấn Bật camera để thử lại.";
+    if (error.name === "NotFoundError") message = "Không tìm thấy webcam. Kết nối camera rồi thử lại.";
+    if (error.name === "NotReadableError") message = "Camera đang được ứng dụng khác sử dụng. Đóng ứng dụng đó rồi thử lại.";
+    cameraUnavailable(message, true);
+  } finally { cameraStarting = false; cameraBtn.disabled = false; }
+}
+const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+function ensureCamera() {
+  if (!stream?.active || !video.videoWidth || video.readyState < 2) throw new Error("Camera đã gián đoạn. Hãy bật lại camera rồi ghi ký hiệu.");
+}
+async function captureFrames() {
+  ensureCamera();
+  const vw = video.videoWidth, vh = video.videoHeight, side = Math.min(vw, vh), out = Math.min(side, MAX_SIDE);
+  const canvas = document.createElement("canvas");
+  canvas.width = canvas.height = out;
+  const ctx = canvas.getContext("2d");
+  if (!ctx) throw new Error("Trình duyệt không hỗ trợ ghi hình bằng canvas.");
+  if (flipped) ctx.setTransform(-1, 0, 0, 1, out, 0);  // lật ngang
+  const frames = [], t0 = performance.now();
+  for (let i = 0; i < N_FRAMES; i++) {
+    const wait = t0 + i * 1000 / FPS - performance.now();
+    if (wait > 0) await sleep(wait);
+    ensureCamera();
+    // Mặc định chỉ lật phần hiển thị, frame gửi đi giữ chiều gốc của camera (trừ khi bật "Lật trái phải").
+    ctx.drawImage(video, (vw - side) / 2, (vh - side) / 2, side, side, 0, 0, out, out);
+    frames.push(canvas.toDataURL("image/jpeg", 0.92));
+    const percent = Math.round((i + 1) / N_FRAMES * 100);
+    progress.style.width = percent + "%"; progress.setAttribute("aria-valuenow", percent);
+  }
+  return frames;
+}
+async function record() {
+  if (busy || btn.disabled) return;
+  busy = true; btn.disabled = cameraBtn.disabled = flipBtn.disabled = select.disabled = true;
+  $("results").setAttribute("aria-busy", "true");
+  $("result-state").className = "pill"; $("result-state").textContent = "Đang chuẩn bị";
+  try {
+    guide.className = "count"; setPhase("count", "Chuẩn bị", 2); $("btn-text").textContent = "Chuẩn bị…";
+    for (let n = COUNTDOWN; n > 0; n--) {
+      ensureCamera(); overlay.textContent = n;
+      setStatus("Sẵn sàng trong " + n + " giây. Đặt hai tay ở tư thế nghỉ.");
+      await sleep(1000);
+    }
+    overlay.textContent = ""; guide.className = "rec";
+    setPhase("rec", "Đang ghi", 2); $("btn-text").textContent = "Đang ghi ký hiệu…"; $("result-state").textContent = "Đang ghi";
+    $("camera-tip").textContent = "Thực hiện trọn một ký hiệu ngay bây giờ";
+    setStatus("Đang ghi trong khoảng " + seconds() + " giây. Hãy thực hiện một ký hiệu.");
+    const frames = await captureFrames();
+    guide.className = ""; setPhase("processing", "Đang xử lý", 2);
+    $("btn-text").textContent = "Đang nhận dạng…"; $("result-state").textContent = "Đang phân tích";
+    $("camera-tip").textContent = "Đã ghi xong · Đang phân tích chuyển động";
+    setStatus("Đã ghi xong. Mô hình đang phân tích chuyển động của bạn…");
+    const controller = new AbortController(), timeout = setTimeout(() => controller.abort(), 90000);
+    let data;
+    try {
+      const response = await fetch("/predict", { method:"POST", headers:{"Content-Type":"application/json"}, body:JSON.stringify({model: model?.id, frames}), signal:controller.signal });
+      data = await response.json();
+      if (!response.ok) throw new Error(data.error || "Máy chủ không thể xử lý yêu cầu.");
+      if (!Array.isArray(data.top) || !data.top.length || !data.top.every((item) => typeof item.name === "string" && Number.isFinite(item.prob) && item.prob >= 0 && item.prob <= 1) || !Number.isFinite(data.ms) || !Number.isInteger(data.n_frames) || (data.diffs !== undefined && !Array.isArray(data.diffs))) throw new Error("Kết quả máy chủ chưa hợp lệ. Hãy thử ghi lại ký hiệu.");
+    } finally { clearTimeout(timeout); }
+    render(data);
+    setPhase(stream ? "ready" : "idle", stream ? "Sẵn sàng" : "Camera đã tắt", 3);
+    setStatus(data.top[0].prob < PROB_OK ? "Độ tin cậy còn thấp. Thử ghi lại với ánh sáng tốt hơn và động tác rõ hơn." : "Đã nhận dạng xong. Bạn có thể ghi tiếp một ký hiệu khác.");
+  } catch (error) {
+    $("result-state").className = "pill error"; $("result-state").textContent = "Thử lại";
+    setPhase(stream ? "ready" : "error", stream ? "Sẵn sàng" : "Chưa kết nối");
+    setStatus(error.name === "AbortError" ? "Máy chủ xử lý quá lâu. Hãy kiểm tra máy chủ rồi thử lại." : "Không thể nhận dạng: " + error.message, true);
+  } finally {
+    guide.className = ""; overlay.textContent = ""; progress.style.width = "0"; progress.setAttribute("aria-valuenow", "0");
+    $("camera-tip").textContent = "Đặt đầu, vai và hai tay trong khung hình"; $("btn-text").textContent = "Ghi ký hiệu";
+    $("results").setAttribute("aria-busy", "false"); busy = false; btn.disabled = !stream?.active; cameraBtn.disabled = flipBtn.disabled = false; select.disabled = !models.length;
+  }
+}
+function render(data) {
+  const best = data.top[0], confident = best.prob >= PROB_OK, percent = (best.prob * 100).toFixed(1);
+  $("word").textContent = best.name; $("word").className = confident ? "" : "low";
+  $("prediction").classList.toggle("low", !confident); $("confidence").textContent = percent + "%"; $("confidence-bar").style.width = percent + "%";
+  $("result-state").className = "pill " + (confident ? "success" : "low"); $("result-state").textContent = confident ? "Đã nhận dạng" : "Nên thử lại";
+  $("top").replaceChildren(...data.top.slice(0,5).map((item,index) => {
+    const row = document.createElement("div"); row.className = "row";
+    row.innerHTML = '<div class="t"><span class="candidate"><span class="rank"></span><span class="candidate-name"></span></span><span class="probability"></span></div><div class="b"><i></i></div>';
+    row.querySelector(".rank").textContent = String(index + 1).padStart(2,"0"); row.querySelector(".candidate-name").textContent = item.name;
+    row.querySelector(".probability").textContent = (item.prob * 100).toFixed(1) + "%"; row.querySelector("i").style.width = (item.prob * 100).toFixed(1) + "%";
+    return row;
+  }));
+  $("result-note").textContent = confident ? "Dự đoán từ mô hình · mang tính tham khảo." : "Độ tin cậy dưới 50%. Hãy thử thực hiện ký hiệu rõ hơn.";
+  $("frame-count").textContent = data.n_frames + " khung hình"; $("inference-time").textContent = Math.round(data.ms) + " ms";
+  $("inference-time").title = "Thời gian mô hình và tiền xử lý trên máy chủ; chưa gồm ghi hình và truyền dữ liệu.";
+  if (Array.isArray(data.diffs)) $("diffs").replaceChildren(...data.diffs.map((base64,index) => {
+    const figure = document.createElement("figure"), img = document.createElement("img"), caption = document.createElement("figcaption");
+    img.src = "data:image/png;base64," + base64; img.alt = $("motion-badge").textContent + ", bước " + (index + 1); img.width = img.height = 112;
+    caption.textContent = String(index + 1).padStart(2,"0"); figure.append(img,caption); return figure;
+  }));
+}
+for (let index = 1; index <= 5; index++) {
+  const row = document.createElement("div"); row.className = "row skeleton"; row.setAttribute("aria-hidden","true");
+  row.innerHTML = '<div class="t"><span class="candidate"><span class="rank">0' + index + '</span><span class="candidate-name"></span></span><span class="probability">—</span></div><div class="b"></div>';
+  $("top").append(row);
+}
+btn.addEventListener("click",record);
+cameraBtn.addEventListener("click",() => {
+  if (busy || cameraStarting) return;
+  if (stream) cameraUnavailable("Camera đã tắt. Bật lại khi bạn muốn tiếp tục."); else startCamera();
+});
+document.addEventListener("keydown",(event) => {
+  if (event.code === "Space" && event.target === document.body && !event.repeat) { event.preventDefault(); record(); }
+});
+window.addEventListener("resize",placeGuide); video.addEventListener("loadedmetadata",placeGuide);
+document.querySelector('a[href="#huong-dan"]').addEventListener("click",() => { $("huong-dan").open = true; });
+window.addEventListener("pagehide",() => { if (stream) stream.getTracks().forEach((track) => track.stop()); });
+setPhase("starting","Đang kết nối");
+loadModels();
+startCamera();
+</script>
+</body>
+</html>

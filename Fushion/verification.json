@@ -1,0 +1,29 @@
+{
+  "status": "PASS",
+  "scope": "portable inference handoff verification",
+  "training": false,
+  "test_split_read": false,
+  "external_video_accuracy_measured": false,
+  "original_checkpoint_byte_identical": true,
+  "python_syntax": "PASS",
+  "input_validation": {
+    "real_sample": "PASS",
+    "bad_shape_rejected": true,
+    "empty_mask_rejected": true
+  },
+  "relocated_model_load_and_forward": "PASS",
+  "video_preprocessing_smoke": {
+    "status": "PASS",
+    "sample": "629903",
+    "split": "valid",
+    "samples": 1,
+    "feature_max_abs_diff_vs_original_cache": {
+      "rgb_features": 0.0,
+      "landmark_features": 0.0
+    },
+    "probability_max_abs_diff_vs_original_cache": 0.0,
+    "same_top1": true,
+    "note": "Pipeline parity fixture only; not an external recognition-accuracy test."
+  },
+  "relocated_cli_features": "PASS"
+}

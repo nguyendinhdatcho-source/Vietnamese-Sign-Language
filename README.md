@@ -16,6 +16,8 @@ Mô hình chính **M0**: frame difference → MobileNetV2 (ImageNet) cho từng 
 - `train_motion.py` – train và đánh giá (`--mode diff|flow`, `--temporal avg|tconv|gru`)
 - `vsl_motion_local.ipynb` – chạy toàn bộ pipeline và bảng so sánh
 - `demo_m0.py` – demo Streamlit cho M0
+- `demo_webcam.py` – demo M0 qua webcam (cửa sổ OpenCV)
+- `space/` – demo web nhiều mô hình (M0, Fusion, Polish), chạy trên máy (xem `space/README.md`)
 - `vsl_motion_work/` – `splits.csv` và kết quả từng run (`metrics.json`, báo cáo, xác suất dự đoán)
 
 Dữ liệu (`data/`) và file chuyển động tiền tính không có trong repo. Chỉ có trọng số của M0.
@@ -26,4 +28,8 @@ Dữ liệu (`data/`) và file chuyển động tiền tính không có trong re
 pip install tensorflow opencv-python pandas scikit-learn matplotlib streamlit
 # đặt dữ liệu vào data/ (train/, valid/, test/, label_mapping.pkl), rồi chạy notebook vsl_motion_local.ipynb
 streamlit run demo_m0.py   # demo M0, cần data/test để chọn video có sẵn
+python demo_webcam.py      # demo webcam: SPACE ghi một lần ký, A tự ghi khi có chuyển động, Q thoát
+python space/app.py        # demo web: mở http://localhost:7860, chọn mô hình rồi bấm "Ghi ký hiệu" (hoặc Space); "Lật trái phải" để lật ngang hình camera
 ```
+
+`demo_webcam.py` cần bản OpenCV có GUI (`opencv-python`, không phải `-headless`).

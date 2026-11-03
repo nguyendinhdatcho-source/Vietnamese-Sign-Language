@@ -1,0 +1,22 @@
+{
+  "seed": 42,
+  "frames": 16,
+  "image_size": 224,
+  "video_processing": {
+    "strict_frame_count": true,
+    "qc": {
+      "flat_max_channel_std": 1.0,
+      "min_valid_frames": 1
+    }
+  },
+  "landmark_extraction": {
+    "min_detection_confidence": 0.5,
+    "min_tracking_confidence": 0.5,
+    "smooth_landmarks": true,
+    "pose_visibility_threshold": 0.5,
+    "low_any_hand_ratio": 0.5,
+    "min_real_frames": 12,
+    "high_padding_fraction": 0.25,
+    "num_threads": 2
+  }
+}

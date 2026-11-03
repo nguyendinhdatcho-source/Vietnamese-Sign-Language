@@ -1,0 +1,11 @@
+{
+  "type": "siformer",
+  "title": "Siformer · Landmark Transformer",
+  "description": "54 điểm MediaPipe, ProbSparse attention · val macro-F1 86,1%",
+  "order": 3,
+  "capture": {
+    "fps": 13,
+    "frames": 30
+  },
+  "landmarks": "fusion"
+}

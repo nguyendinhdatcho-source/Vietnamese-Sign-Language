@@ -1,0 +1,7 @@
+{
+  "type": "fusion",
+  "title": "Fusion · RGB + Landmark Attention",
+  "description": "MobileNetV2 + MediaPipe Holistic · val macro-F1 59,0%",
+  "order": 1,
+  "capture": {"fps": 13, "frames": 30}
+}

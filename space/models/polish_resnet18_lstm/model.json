@@ -1,0 +1,17 @@
+{
+  "type": "resnet_lstm",
+  "title": "Polish · ResNet-18 + LSTM",
+  "description": "RGB 16 frame · KerasHub ResNet-18 + LSTM(256)",
+  "order": 2,
+  "capture": {
+    "fps": 13,
+    "frames": 30
+  },
+  "weights": "model.weights.h5",
+  "config": {
+    "num_frames": 16,
+    "lstm_hidden": 256,
+    "temporal_dropout": 0.0,
+    "classifier_dropout": 0.3
+  }
+}
