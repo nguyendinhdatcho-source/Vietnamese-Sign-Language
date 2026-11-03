@@ -15,13 +15,9 @@ CSV cần các cột: path, label (0–99; test để -1), split (train | val | 
 Dùng đúng file chia tập theo nhóm của cả nhóm để so sánh công bằng với RGB/landmark.
 
 Ví dụ:
-  # M0 – baseline frame difference
+  # M0 – frame difference + trung bình thời gian
   python train_motion.py --csv splits.csv --data_root /data/vsl --motion_root /data/vsl_motion \
       --mode diff --temporal avg --out runs/m0_diff_avg
-  # M1 – optical flow + trung bình thời gian
-  python train_motion.py ... --mode flow --temporal avg   --out runs/m1_flow_avg
-  # M2 – optical flow + temporal conv
-  python train_motion.py ... --mode flow --temporal tconv --out runs/m2_flow_tconv
 """
 import argparse
 import json

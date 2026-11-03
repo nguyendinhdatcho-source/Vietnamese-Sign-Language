@@ -1,0 +1,20 @@
+{
+  "data_root": "data",
+  "manifest_dir": "artifacts/landmark_manifest_v1",
+  "label_mapping": "configs/labels.json",
+  "cache_dir": "artifacts/landmark_siformer_v1",
+  "run_dir": "runs/landmark_siformer_v1",
+  "num_classes": 100,
+  "seed": 379,
+  "device": "cpu",
+  "frames": 16,
+  "sampling": "uniform_floor",
+  "offline_variants": 0,
+  "rgb_resize": null,
+  "extractor": {"name": "imported_landmark", "version": "m05_npz_float32_receipt_v1", "model_complexity": 1, "min_detection_confidence": 0.5, "min_tracking_confidence": 0.5, "pose_visibility": 0.5},
+  "augmentation": {"speed": [0.9, 1.1], "crop_area": [0.85, 1.0], "brightness": [0.8, 1.2], "contrast": [0.8, 1.2], "saturation": [0.8, 1.2]},
+  "rectification": {"enabled": false, "aa_table": null, "fe_table": null, "alpha": 0.5},
+  "model": {"encoder_layers": 3, "decoder_layers": 2, "inference": "static", "patience": 0, "pretrained": null},
+  "train": {"batch_size": 24, "workers": 0, "epochs": 100, "weighted_sampler": true, "optimizer": "AdamW", "lr": 0.0001, "weight_decay": 1e-8, "scheduler": "MultiStepLR", "milestones": [60, 80], "gamma": 0.1, "gradient_clip": 1.0, "amp": false, "early_stopping_patience": null},
+  "evaluation": {"warmup": 10, "latency_repeats": 50, "calibration_patiences": [0, 1, 2]}
+}

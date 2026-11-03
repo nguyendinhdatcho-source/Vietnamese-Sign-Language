@@ -14,7 +14,5 @@ __pycache__/
 # Python riêng cho MediaPipe 0.10.14 (mô hình fusion)
 .venv-mp/
 
-# Gói model đã giải nén / checkpoint TensorFlow (giữ ngoài git như các trọng số khác)
-/Siformer/
+# File zip gốc của Siformer (đã giải nén vào Siformer/)
 /siformer_best_model.zip
-*.ckpt-*.data-*
